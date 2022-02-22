@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import Table from "./Table";
+import { USER, CONTACT } from "../../utils/Url";
+import { getRefToken, getUserID } from '../../utils/Auth';
+import axios from 'axios';
 
 export default function MessageCardTable(props) {
-    // const [actionEdit, setActionsEdit] = useState(false);
-    // console.log(actionEdit)
-    const tableItems = [
-        {   no: "1", nama: "Nadia Nabila Salma", company: "Politeknik Elektronika Negeri Surabaya"},
-        {   no: "2", nama: "Geluh Tanaya Bestari", company: "PT. Otak Kanan"},
-    ];
+    const [apiData, setApiData] = useState([]);
+    const [refreshData, setRefreshData] = useState(0);
+
+    useEffect(() => {
+        async function getContact() {
+            try{
+                const tokenRespon = await axios.post(USER + "token", {
+                    userID: getUserID(),
+                    refreshToken: getRefToken()
+                });
+                const contactRespon = await axios.get(CONTACT, {
+                    headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
+                });
+                setApiData(contactRespon.data);
+                console.log(contactRespon.data);
+            } catch(err){
+                console.log(err);
+            }
+        };
+        getContact();
+    },[refreshData]);
+
     return (
         <Card>
             <CardHeader color="blue" contentPosition="left">
@@ -27,11 +46,12 @@ export default function MessageCardTable(props) {
                             <th className="py-3 px-6 text-center text-sm font-normal text-blue">Actions</th>
                         </tr>
                     </thead>
-                    {tableItems.map((value, index) => (
+                    {apiData.map((value, index) => (
                         <Table
-                            key={index}
-                            column1={value.no}
-                            column2={value.nama}
+                            key={value._id}
+                            id={value._id}
+                            column1={index+1}
+                            column2={value.name}
                             column3={value.company}
                             actionEdit={false}
                         />

@@ -6,7 +6,8 @@ const Table = (props) => {
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [deleteItem, setDeleteItem] = useState();
     const [nameItem, setNameItem] = useState();
-    const [refreshData, setRefreshData] = useState(0);
+    const [modal, setModal] = useState();
+    const [refreshData, onSuccess] = useState();
     
     return (
         <tbody className="text-grey text-sm font-normal">
@@ -14,16 +15,16 @@ const Table = (props) => {
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                     <span>{props.column1}</span>
                 </td>
-                <td className="py-3 px-6 text-left">
+                <td className="py-3 px-6 text-left capitalize">
                     <span>{props.column2}</span>
                 </td>
-                <td className="py-3 px-6 text-center">
+                <td className="py-3 px-6 text-center capitalize">
                     <span>{props.column3}</span>
                 </td>
                 <td className="py-3 px-6 text-center">
                     <div className="flex item-center justify-center">
                         <Link className="flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer"
-                            to={`${props.actionEdit ? `/detail-berita` : `/detail-pesan`}`}
+                            to={`${props.actionEdit ? `/detail-berita` : `/detail-pesan/${props.id}`}`}
                         >
                             <svg className="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -40,8 +41,10 @@ const Table = (props) => {
                         <div className="flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-red hover:text-white hover:scale-110 cursor-pointer"
                             onClick={() => {
                                 setShowModalDelete(true);
-                                setDeleteItem(props.column1);
+                                setDeleteItem(props.id);
                                 setNameItem(props.column2);
+                                setModal(props.actionEdit);
+                                onSuccess(props.refreshData)
                             }}
                         >
                             <svg className="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,7 +54,7 @@ const Table = (props) => {
                     </div>
                 </td>
             </tr>
-            {showModalDelete && <ModalDelete closeModalDelete={setShowModalDelete} deleteItem={deleteItem} nameItem={nameItem}/>}
+            {showModalDelete && <ModalDelete closeModalDelete={setShowModalDelete} deleteItem={deleteItem} nameItem={nameItem} modal={modal}/>}
         </tbody>
     );
 }

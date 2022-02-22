@@ -7,6 +7,7 @@ import DetailBerita from "../pages/DetailNews";
 import EditBerita from "../pages/EditNews";
 import GantiPassword from "../pages/ChangePassword";
 import PostingBerita from "../pages/PostNews";
+import DetailMessage from "../pages/DetailMessage";
 
 export const APP_ROUTE = [
     {
@@ -75,6 +76,13 @@ export const APP_ROUTE = [
         path: "/posting-berita",
         exact: true,
         component: PostingBerita,
+        private: true,
+    },
+    {
+        name: "Detail Pesan",
+        path: "/detail-pesan/:id",
+        exact: true,
+        component: DetailMessage,
         private: true,
     },
 ];

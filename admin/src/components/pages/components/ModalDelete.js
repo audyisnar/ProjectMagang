@@ -1,12 +1,34 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@material-tailwind/react/Button";
+import { USER, CONTACT  } from "../../utils/Url";
+import { getRefToken, getUserID } from '../../utils/Auth';
+import axios from 'axios';
 
-const ModalDelete = ({closeModalDelete, nameItem}) => {
+const ModalDelete = ({closeModalDelete, deleteItem, nameItem, modal}) => {
   const history = useHistory();
 
   const handleDelete = () => {
-    history.push("/dashboard");
+    if(modal){
+      history.push("/pesan");
+    } else{
+        async function getDeleteMessage() {
+          try{
+              const tokenRespon = await axios.post(USER + "token", {
+                  userID: getUserID(),
+                  refreshToken: getRefToken()
+              });
+              const contactRespon = await axios.delete(CONTACT + deleteItem, {
+                  headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
+              });
+              console.log("Pesan Berhasil Dihapus");
+              history.push("/berita");
+          } catch(err){
+              console.log(err);
+          }
+      };
+      getDeleteMessage();
+    }
   };
   return (
     <>

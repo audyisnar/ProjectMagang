@@ -1,9 +1,34 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import TableCard from './components/MessageTableCard';
 import Sidebar from "./components/Sidebar";
+import { USER, CONTACT  } from "../utils/Url";
+import { getRefToken, getUserID } from '../utils/Auth';
+import axios from 'axios';
 
 const DetailMessage = () => {
+    const { id } = useParams();
+    const [apiData, setApiData] = useState([]);
+
+    useEffect(() => {
+        async function getContactId() {
+            try{
+                const tokenRespon = await axios.post(USER + "token", {
+                    userID: getUserID(),
+                    refreshToken: getRefToken()
+                });
+                const contactRespon = await axios.get(CONTACT + id, {
+                    headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
+                });
+                setApiData(contactRespon.data);
+                console.log(contactRespon.data);
+            } catch(err){
+                console.log(err);
+            }
+        };
+        getContactId();
+    },[]);
+
   return (
     <div>
         <Sidebar />
@@ -14,22 +39,22 @@ const DetailMessage = () => {
                 </Link>
                 <div className="mt-4 mb-10 p-14 bg-white shadow-2xl space-y-10 rounded-xl mx-auto max-w-full">
                     <div className="text-netral">
-                        <div className="font-bold text-lg">
-                            Nadia Nabila Salma
+                        <div className="font-bold text-lg uppercase">
+                            {apiData.name}
                         </div>
-                        <div className="font-bold text-md">
-                            Politeknik Elektronika Negeri Surabaya
+                        <div className="font-bold text-md capitalize">
+                            {apiData.company}
                         </div>
                         <div className="text-md">
-                            Nadia@yahoo.com
+                            {apiData.email}
                         </div>
                         <div className="text-md mb-8">
-                            081-xxx-xxx-xxx
+                            {apiData.phone}
                         </div>
                         <hr/>
                     </div>
-                    <div className="text-netral text-sm">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    <div className="text-netral text-sm capitalize">
+                        {apiData.message}
                     </div>
                 </div>
             </div>

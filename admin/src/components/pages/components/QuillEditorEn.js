@@ -191,12 +191,12 @@ PollBlot.tagName = 'p';
 PollBlot.className = 'poll-inner-post';
 Quill.register(PollBlot);
 
-class QuillEditor extends React.Component {
+class QuillEditorEn extends React.Component {
 
     bandId;
     placeholder;
-    onEditorChange;
-    onFilesChange;
+    onEditorChangeEn;
+    onFilesChangeEn;
     onPollsChange;
     _isMounted;
 
@@ -233,7 +233,7 @@ class QuillEditor extends React.Component {
         this.setState({
             editorHtml: html
         }, () => {
-            this.props.onEditorChange(this.state.editorHtml);
+            this.props.onEditorChangeEn(this.state.editorHtml);
         });
     };
 
@@ -283,7 +283,7 @@ class QuillEditor extends React.Component {
                         if (this._isMounted) {
                             this.setState({
                                 files: [...this.state.files, file]
-                            }, () => { this.props.onFilesChange(this.state.files) });
+                            }, () => { this.props.onFilesChangeEn(this.state.files) });
                         }
                     } else {
                         return alert('failed to upload file')
@@ -320,7 +320,7 @@ class QuillEditor extends React.Component {
                         if (this._isMounted) {
                             this.setState({
                                 files: [...this.state.files, file]
-                            }, () => { this.props.onFilesChange(this.state.files) });
+                            }, () => { this.props.onFilesChangeEn(this.state.files) });
                         }
                     } else {
                         return alert('failed to upload file')
@@ -358,7 +358,7 @@ class QuillEditor extends React.Component {
                         if (this._isMounted) {
                             this.setState({
                                 files: [...this.state.files, file]
-                            }, () => { this.props.onFilesChange(this.state.files) });
+                            }, () => { this.props.onFilesChangeEn(this.state.files) });
                         }
                     };
                 })
@@ -368,7 +368,7 @@ class QuillEditor extends React.Component {
     render() {
         return (
             <div>
-                <div id="toolbar">
+                <div id="toolbarEn">
                     <select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
                         <option value="1" />
                         <option value="2" />
@@ -415,7 +415,7 @@ class QuillEditor extends React.Component {
     modules = {
         syntax: true,
         toolbar: {
-            container: "#toolbar",
+            container: "#toolbarEn",
             //id ="toorbar"는  그 위에 B I U S I V F P 이거 있는 곳이다. 
             handlers: {
                 insertImage: this.imageHandler,
@@ -435,4 +435,4 @@ class QuillEditor extends React.Component {
     ];
 }
 
-export default QuillEditor;
+export default QuillEditorEn;

@@ -1885,14 +1885,6 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tinymce/tinymce-react@^3.13.0":
-  "integrity" "sha512-8+OHYIUP9W5D5z7gknausaG48ovQtEvjcK4c+zpha7QppRVVX0ltaINpo10V6Vb4qj9Jf7ZFfZpMRxxcFL2YvQ=="
-  "resolved" "https://registry.npmjs.org/@tinymce/tinymce-react/-/tinymce-react-3.13.0.tgz"
-  "version" "3.13.0"
-  dependencies:
-    "prop-types" "^15.6.2"
-    "tinymce" "^5.5.1"
-
 "@tippyjs/react@^4.2.5":
   "integrity" "sha512-YBLgy+1zznBNbx4JOoOdFXWMLXjBh9hLPwRtq3s8RRdrez2l3tPBRt2m2909wZd9S1KUeKjOOYYsnitccI9I3A=="
   "resolved" "https://registry.npmjs.org/@tippyjs/react/-/react-4.2.5.tgz"
@@ -13217,11 +13209,6 @@
   "integrity" "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="
   "resolved" "https://registry.npmjs.org/tiny-warning/-/tiny-warning-1.0.3.tgz"
   "version" "1.0.3"
-
-"tinymce@^5.5.1":
-  "integrity" "sha512-O59ssHNnujWvSk5Gt8hIGrdNCMKVWVQv9F8siAgLTRgTh0t3NDHrP1UlLtCxArUi9DPWZvlBeUz8D5fJTu7vnA=="
-  "resolved" "https://registry.npmjs.org/tinymce/-/tinymce-5.10.3.tgz"
-  "version" "5.10.3"
 
 "tippy.js@^6.3.1":
   "integrity" "sha512-JnFncCq+rF1dTURupoJ4yPie5Cof978inW6/4S6kmWV7LL9YOSEVMifED3KdrVPEG+Z/TFH2CDNJcQEfaeuQww=="

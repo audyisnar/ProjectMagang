@@ -24,10 +24,17 @@
     cursor: pointer;
 }
 
+#iconPassword{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
 #Icon {
     position: absolute;
     top: 68%;
     left: 15px;
     transform: translateY(-50%);
 }
-

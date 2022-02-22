@@ -1,12 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import QuillEditor from "./components/QuillEditor";
-import { Editor } from '@tinymce/tinymce-react';
-//import tinymce from "tinymce";
+import QuillEditorEn from "./components/QuillEditorEn";
 
 const PostNews = () => {
     const [content, setContent] = useState("");
     const [files, setFiles] = useState([]);
+    const [contentEn, setContentEn] = useState("");
+    const [filesEn, setFilesEn] = useState([]);
 
     const onEditorChange = (value) => {
         setContent(value)
@@ -17,18 +18,21 @@ const PostNews = () => {
         setFiles(files)
     }
 
-    const onSubmit = (event) => {
-        setContent("");
-        console.log("sukses");
+    const onEditorChangeEn = (value) => {
+        setContentEn(value)
+        console.log(contentEn)
     }
 
-    // const editorRef = useRef(null);
+    const onFilesChangeEn = (files) => {
+        setFilesEn(files)
+    }
 
-    // const log = () => {
-    //     if (editorRef.current) {
-    //         console.log(editorRef.current.getContent());
-    //     }
-    // };
+    const onSubmit = (event) => {
+        //setContent("");
+        //setContentEn("");
+        console.log(content);
+        console.log(contentEn);
+    }
 
     return (
         <div>
@@ -36,34 +40,41 @@ const PostNews = () => {
             <div className="md:ml-64">
                 <div className="mt-8 px-6 md:px-8 h-auto">
                     <div className="container mt-4 mb-10 mx-auto max-w-full">
-                        <button>Kembali</button>
-                            <QuillEditor
-                                placeholder={"Start Posting Something"}
-                                onEditorChange={onEditorChange}
-                                onFilesChange={onFilesChange}
-                            />
-                        <button onSubmit={onSubmit}>Sumbit</button>
-                            {/* <Editor
-                                apiKey="n9lrubvylwhlonkrak969hi913ctlw4wqyockyuu9me48hsa"
-                                onInit={(evt, editor) => editorRef.current = editor}
-                                initialValue="<p>This is the initial content of the editor.</p>"
-                                init={{
-                                height: 500,
-                                menubar: false,
-                                plugins: [
-                                    'advlist autolink lists link image charmap print preview anchor',
-                                    'searchreplace visualblocks code fullscreen',
-                                    'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar: 'undo redo | formatselect | ' +
-                                'bold italic backcolor | alignleft aligncenter ' +
-                                'alignright alignjustify | bullist numlist outdent indent | ' +
-                                'removeformat | link image | code | help',
-                                // 
-                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                                }}
-                            />
-                            <button onClick={log}>Log editor content</button> */}
+                        <div className="mt-4 mb-10 p-14 bg-white shadow-xl space-y-10 rounded-xl mx-auto max-w-full">
+                            <div className="space-y-4">
+                                <label className="text-netral text-md font-semibold tracking-wide" for="gambar">Upload Thumbnail</label><br/>
+                                <input type="file" name="thumbnail"/>
+                            </div>
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-center bg-blue h-10 rounded-t-3xl">
+                                    <p className="text-white font-semibold text-netral text-md tracking-wide">Form Input Bahasa Indonesia</p>
+                                </div>
+                                <div>
+                                    <label className="text-netral text-sm font-semibold tracking-wide">Judul Berita</label><br/>
+                                    <input type="text" name="title" className="p-4 w-full h-10 rounded pl-4 mt-1 text-sm border border-grey-300 focus:outline-none" placeholder="Judul Berita"/>
+                                </div>  
+                                <QuillEditor
+                                    placeholder={"Mulai Posting Berita!"}
+                                    onEditorChange={onEditorChange}
+                                    onFilesChange={onFilesChange}
+                                />
+                            </div>
+                            <div className="space-y-4">
+                                <div className="flex items-center justify-center bg-blue h-10 rounded-t-3xl">
+                                    <p className="text-white font-semibold text-netral text-md tracking-wide">Form Input Bahasa Inggris</p>
+                                </div>
+                                <div>
+                                    <label className="text-netral text-sm font-semibold tracking-wide">Title News</label><br/>
+                                    <input type="text" name="title" className="p-4 w-full h-10 rounded pl-4 mt-1 text-sm border border-grey-300 focus:outline-none" placeholder="Title News"/>
+                                </div>  
+                                <QuillEditorEn
+                                    placeholder={"Start Posting News!"}
+                                    onEditorChangeEn={onEditorChangeEn}
+                                    onFilesChangeEn={onFilesChangeEn}
+                                />
+                            </div>
+                            <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Sumbit</button>
+                        </div>
                     </div>
                 </div>
             </div>

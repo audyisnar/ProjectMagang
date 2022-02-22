@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { login } from "../utils/Auth";
-import { LOGIN } from '../utils/Url';
+import { USER } from '../utils/Url';
 import '../../assets/styles/Login.css';
 import Logo from "../../assets/img/Logo.png";
 import showIcon from '../../assets/img/eye.png';
@@ -31,14 +31,15 @@ const Login = () => {
 
   const _onSubmit = () => {
     axios
-        .post(LOGIN, {
+        .post(USER + "login", {
             email: email,
             password: password
         })
         .then((res) => {
             console.log("sukses bro");
             console.log(res.data);
-            login(res.data.token);
+            console.log(res.data.refreshToken);
+            login(res.data.refreshToken, res.data.userID);
             history.push("/dashboard");
         }).catch((err) => {
             console.log("gagal bro");
@@ -91,7 +92,13 @@ const Login = () => {
                   </div>
                 </div>
               </div>
-              <button className="bg-blue focus:outline-none focus:ring focus:ring-info-300 mt-8 mb-10 w-full font-semibold py-2 rounded-md text-white tracking-wide"
+              {error && 
+                <div className="bg-red-100 border text-red-700 px-4 py-2 rounded relative mt-4" role="alert">
+                  <strong className="font-bold text-sm">Login Gagal! </strong>
+                  <span className="block sm:inline text-sm">Email atau password salah.</span>
+                </div>
+              }
+              <button className="bg-blue focus:outline-none focus:ring focus:ring-info-300 mt-6 mb-10 w-full font-semibold py-2 rounded-md text-white tracking-wide"
                 onClick={_onSubmit}
               >
                 LOGIN
