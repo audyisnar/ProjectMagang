@@ -5,7 +5,7 @@ import '../../assets/styles/Login.css';
 import showIcon from '../../assets/img/eye.png';
 import showOffIcon from '../../assets/img/eye_invisible.png';
 import { USER } from "../utils/Url";
-import { getRefToken, getUserID } from '../utils/Auth';
+import { getToken, logout, getUserID } from '../utils/Auth';
 import axios from 'axios';
 
 const ChangePassword = () => {
@@ -35,24 +35,26 @@ const ChangePassword = () => {
             console.log("Passwords match");
             async function update() {
               try{
-                  const tokenRespon = await axios.post(USER + "token", {
-                      userID: getUserID(),
-                      refreshToken: getRefToken()
-                  });
+                const tokenRespon = await getToken();
+                if(tokenRespon === 400){
+                    alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                    logout();
+                    history.replace("/");
+                } else{
                   const variables = {
                     userID: getUserID(),
                     password: password,
                     newPassword: newPassword
                   }
                   const updateRespon = await axios.post(USER + "reset-password", variables, {
-                      headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
+                      headers: { Authorization: `Bearer ${tokenRespon}`}
                   });
                   alert('Password Berhasil Dirubah');
                   history.replace('/dashboard');
                   console.log(updateRespon.data);
-              } catch(response){
+                }
+              } catch(error){
                   setError(true);
-                  console.log(response);
               }
           };
           update();

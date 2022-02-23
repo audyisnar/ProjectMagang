@@ -43,8 +43,6 @@ const Login = () => {
             history.push("/dashboard");
         }).catch((err) => {
             console.log("gagal bro");
-            console.log(email);
-            console.log(password);
             console.log(err);
             setError(true);
         });

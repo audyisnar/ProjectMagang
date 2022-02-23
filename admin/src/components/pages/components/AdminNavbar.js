@@ -6,8 +6,8 @@ import Image from '@material-tailwind/react/Image';
 import Dropdown from '@material-tailwind/react/Dropdown';
 import DropdownItem from '@material-tailwind/react/DropdownItem';
 import ProfilePicture from '../../../assets/img/Person.png';
-import { USER  } from "../../utils/Url";
-import { getRefToken, getUserID, logout } from '../../utils/Auth';
+import { USER } from "../../utils/Url";
+import { getUserID, logout, getToken } from '../../utils/Auth';
 import axios from 'axios';
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
@@ -21,18 +21,22 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
 
     const _onLogout = async () => {
         try {
-            const tokenRespon = await axios.post(USER + "token", {
-                userID: getUserID(),
-                refreshToken: getRefToken()
-            });
-            const logoutRespon = await axios.delete(USER + "logout", {
-                headers: { Authorization: `Bearer ${tokenRespon.data.token}`},
-                userID: getUserID()
-            });
-            logout();
-            history.replace("/");
-            console.log("Logout Sukses");
+            const tokenRespon = await getToken();
+            if(tokenRespon === 400){
+                alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                logout();
+                history.replace("/");
+            } else{
+                const logoutRespon = await axios.delete(USER + "logout", {
+                    headers: { Authorization: `Bearer ${tokenRespon}`},
+                    userID: getUserID()
+                });
+                logout();
+                history.replace("/");
+                console.log("Logout Sukses");
+            }
         } catch (err) {
+            console.error("Logout Error");
             console.error(err);
         }
     };

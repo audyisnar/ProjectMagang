@@ -24,6 +24,19 @@ export const getRefToken = () => {
     return localStorage.getItem("REFTOKEN");
 };
 
+export const getToken = async () => {
+    try{
+        const tokenRespon = await axios.post(USER + "token", {
+            userID: getUserID(),
+            refreshToken: getRefToken()
+        });
+        return tokenRespon.data.token;
+    } catch(err){
+        console.log(err.response.status);
+        return err.response.status;
+    }
+};
+
 export const getUserID = () => {
     return localStorage.getItem("USERID");
 };

@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import Table from "./Table";
-import { USER, CONTACT } from "../../utils/Url";
-import { getRefToken, getUserID } from '../../utils/Auth';
+import { CONTACT } from "../../utils/Url";
+import { getToken, logout } from '../../utils/Auth';
 import axios from 'axios';
 
 export default function MessageCardTable(props) {
+    const history = useHistory();
     const [apiData, setApiData] = useState([]);
     const [refreshData, setRefreshData] = useState(0);
 
     useEffect(() => {
         async function getContact() {
             try{
-                const tokenRespon = await axios.post(USER + "token", {
-                    userID: getUserID(),
-                    refreshToken: getRefToken()
-                });
-                const contactRespon = await axios.get(CONTACT, {
-                    headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
-                });
-                setApiData(contactRespon.data);
-                console.log(contactRespon.data);
+                const tokenRespon = await getToken();
+                if(tokenRespon === 400){
+                    alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                    logout();
+                    history.replace("/");
+                } else{
+                    const contactRespon = await axios.get(CONTACT, {
+                        headers: { Authorization: `Bearer ${tokenRespon}`}
+                    });
+                    setApiData(contactRespon.data);
+                    console.log(contactRespon.data);
+                }
             } catch(err){
                 console.log(err);
             }

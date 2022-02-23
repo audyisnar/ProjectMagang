@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import TableCard from './components/MessageTableCard';
 import Sidebar from "./components/Sidebar";
-import { USER, CONTACT  } from "../utils/Url";
-import { getRefToken, getUserID } from '../utils/Auth';
+import { CONTACT  } from "../utils/Url";
+import { getToken, logout } from '../utils/Auth';
 import axios from 'axios';
 
 const DetailMessage = () => {
+    const history = useHistory();
     const { id } = useParams();
     const [apiData, setApiData] = useState([]);
 
     useEffect(() => {
         async function getContactId() {
             try{
-                const tokenRespon = await axios.post(USER + "token", {
-                    userID: getUserID(),
-                    refreshToken: getRefToken()
-                });
-                const contactRespon = await axios.get(CONTACT + id, {
-                    headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
-                });
-                setApiData(contactRespon.data);
-                console.log(contactRespon.data);
+                const tokenRespon = await getToken();
+                if(tokenRespon === 400){
+                    alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                    logout();
+                    history.replace("/");
+                } else{
+                    const contactRespon = await axios.get(CONTACT + id, {
+                        headers: { Authorization: `Bearer ${tokenRespon}`}
+                    });
+                    setApiData(contactRespon.data);
+                    console.log(contactRespon.data);
+                }                
             } catch(err){
                 console.log(err);
             }
