@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar";
 import QuillEditor from "./components/QuillEditor";
 import QuillEditorEn from "./components/QuillEditorEn";
 import { NEWS } from "../utils/Url";
-import { getUserID, logout, getToken } from '../utils/Auth';
+import { logout, getToken } from '../utils/Auth';
 import axios from 'axios';
 
 const PostNews = () => {
@@ -71,8 +71,8 @@ const PostNews = () => {
                 history.replace("/");
             } else{
                 const dataNews = [
-                    {   title: titleId, languageCode: "", data: contentId },
-                    {   title: titleEn, languageCode: "", data: contentEn }
+                    {   title: titleId, languageCode: "id", data: contentId },
+                    {   title: titleEn, languageCode: "en", data: contentEn }
                 ];
 
                 const variables = {
@@ -84,9 +84,12 @@ const PostNews = () => {
                     headers: { Authorization: `Bearer ${tokenRespon}`}
                 });
                 console.log(postingRespon.data);
+                alert("Berita berhasil diposting!");
+                history.replace('/berita');
             }
         } catch(err){
             console.log(err);
+            alert("Berita gagal diposting!");
         }
     }
 

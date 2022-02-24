@@ -516,6 +516,8 @@ video {
 	display: table;
 }.grid{
 	display: grid;
+}.contents{
+	display: contents;
 }.hidden{
 	display: none;
 }.h-auto{
@@ -564,6 +566,8 @@ video {
 	width: 4rem;
 }.w-5{
 	width: 1.25rem;
+}.w-3{
+	width: 0.75rem;
 }.w-4{
 	width: 1rem;
 }.min-w-max{

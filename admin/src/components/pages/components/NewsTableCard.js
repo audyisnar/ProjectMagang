@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import Table from "./Table";
+import { NEWS } from "../../utils/Url";
+import { getToken, logout } from '../../utils/Auth';
+import axios from 'axios';
 
 export default function NewsCardTable(props) {
     // const [actionEdit, setActionsEdit] = useState(true);
@@ -11,6 +15,33 @@ export default function NewsCardTable(props) {
         {   no: "1", title: "Setengah Juta Kematian Corona Tercatat di India", date: "Jumat, 04 Feb 2022"},
         {   no: "2", title: "Bamsoet Minta RI Tak Ketinggalan Songsong Peradaban Baru di Metaverse", date: "Sabtu, 05 Feb 2022"},
     ];
+
+    const history = useHistory();
+    const [apiData, setApiData] = useState([]);
+    const [refreshData, setRefreshData] = useState(0);
+
+    useEffect(() => {
+        async function getContact() {
+            try{
+                const tokenRespon = await getToken();
+                if(tokenRespon === 400){
+                    alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                    logout();
+                    history.replace("/");
+                } else{
+                    const newsRespon = await axios.get(NEWS, {
+                        headers: { Authorization: `Bearer ${tokenRespon}`}
+                    });
+                    setApiData(newsRespon.data);
+                    console.log(newsRespon.data);
+                }
+            } catch(err){
+                console.log(err);
+            }
+        };
+        getContact();
+    },[refreshData]);
+
     return (
         <Card>
             <CardHeader color="blue" contentPosition="left">
@@ -27,12 +58,13 @@ export default function NewsCardTable(props) {
                             <th className="py-3 px-6 text-center text-sm font-normal text-blue">Actions</th>
                         </tr>
                     </thead>
-                    {tableItems.map((value, index) => (
+                    {apiData.map((value, index) => (
                         <Table
-                            key={index}
-                            column1={value.no}
-                            column2={value.title}
-                            column3={value.date}
+                            key={value._id}
+                            id={value._id}
+                            column1={index+1}
+                            column2={value.name}
+                            column3={value.company}
                             actionEdit={true}
                         />
                     ))}

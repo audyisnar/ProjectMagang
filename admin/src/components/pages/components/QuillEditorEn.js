@@ -4,6 +4,8 @@ import "react-quill/dist/quill.snow.css";
 import Video from "../../../assets/img/play-button.png";
 import File from "../../../assets/img/file.png";
 import Image from "../../../assets/img/image.png";
+import { NEWS } from "../../utils/Url";
+import { getToken } from '../../utils/Auth';
 
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
@@ -251,33 +253,40 @@ class QuillEditorEn extends React.Component {
     };
 
 
-    insertImage = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-
-        if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length > 0) {
-            const file = e.currentTarget.files[0];
-            console.log(file);
-            
-            let formData = new FormData();
-            const config = {
-                header: { 'content-type': 'multipart/form-data' }
-            }
-            formData.append("file", file);
-
-            axios.post('/api/blog/uploadfiles', formData, config)
-                .then(response => {
-                    if (response.data.success) {
-
+    insertImage = async (e) => {
+        try{
+            e.stopPropagation();
+            e.preventDefault();
+            if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length > 0) {
+                const file = e.currentTarget.files[0];
+                console.log(file);
+                
+                let formData = new FormData();
+                // const config = {
+                //     header: { 'content-type': 'multipart/form-data' }
+                // }
+                formData.append("files", file);
+                const tokenRespon = await getToken();
+                    const insertImageRespon = await axios.post(NEWS + "uploadimages", formData, {
+                        headers: { Authorization: `Bearer ${tokenRespon}`}
+                    });
+                    if (insertImageRespon.status === 200) {
+                        this.setState({ apiData: insertImageRespon.data });
+                        console.log("halo"+ insertImageRespon.data[0].url);
+                        //console.log("halo"+ this.state.apiData);
+                        //console.log("halo"+ this.state.apiData[0].url);
                         const quill = this.reactQuillRef.getEditor();
                         quill.focus();
 
                         let range = quill.getSelection();
                         let position = range ? range.index : 0;
+                        // {this.state.apiData.map((value, index) => (
+                        //     console.log(value.url)
+                        // ))}
 
                         //먼저 노드 서버에다가 이미지를 넣은 다음에   여기 아래에 src에다가 그걸 넣으면 그게 
                         //이미지 블롯으로 가서  크리에이트가 이미지를 형성 하며 그걸 발류에서     src 랑 alt 를 가져간후에  editorHTML에 다가 넣는다.
-                        quill.insertEmbed(position, "image", { src: "http://localhost:5000/" + response.data.url, alt: response.data.fileName });
+                        quill.insertEmbed(position, "image", { src: "http://192.168.195.195:5000" + insertImageRespon.data[0].url, alt: insertImageRespon.data[0].fileName });
                         quill.setSelection(position + 1);
 
                         if (this._isMounted) {
@@ -287,8 +296,10 @@ class QuillEditorEn extends React.Component {
                         }
                     } else {
                         return alert('failed to upload file')
-                    }
-                })
+                    }       
+            }        
+        } catch(err){
+            console.log(err);
         }
     };
 
