@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import TableCard from './components/MessageTableCard';
 import Sidebar from "./components/Sidebar";
-import { CONTACT  } from "../utils/Url";
+import { CONTACT } from "../utils/Url";
 import { getToken, logout } from '../utils/Auth';
 import axios from 'axios';
 

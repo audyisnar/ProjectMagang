@@ -44,15 +44,8 @@ export const APP_ROUTE = [
         icon: "bi bi-chat-dots",
     },
     {
-        name: "Detail Pesan",
-        path: "/detail-pesan",
-        exact: true,
-        component: DetailPesan,
-        private: true,
-    },
-    {
         name: "Detail Berita",
-        path: "/detail-berita",
+        path: "/detail-berita/:id",
         exact: true,
         component: DetailBerita,
         private: true,

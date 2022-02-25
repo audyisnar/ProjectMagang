@@ -1,34 +1,62 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@material-tailwind/react/Button";
-import { USER, CONTACT  } from "../../utils/Url";
-import { getRefToken, getUserID } from '../../utils/Auth';
+import { NEWS, CONTACT  } from "../../utils/Url";
+import { getToken, logout } from '../../utils/Auth';
 import axios from 'axios';
 
-const ModalDelete = ({closeModalDelete, deleteItem, nameItem, modal}) => {
+const ModalDelete = ({closeModalDelete, onSuccess, deleteItem, nameItem, edit}) => {
   const history = useHistory();
+  console.log(edit);
 
   const handleDelete = () => {
-    if(modal){
-      history.push("/pesan");
+    if(edit){
+      async function getDeleteNews() {
+        try{
+          const tokenRespon = await getToken();
+          if(tokenRespon === 400){
+              alert("Authentifikasi Gagal, Silahkan Login Kembali");
+              logout();
+              history.replace("/");
+          } else{
+            const deleteContactRespon = await axios.delete(NEWS + deleteItem, {
+              headers: { Authorization: `Bearer ${tokenRespon}`}
+            });
+            onSuccess(oldKey => oldKey +1);
+            closeModalDelete();
+            console.log("Berita Berhasil Dihapus");
+            alert("Berita Berhasil Dihapus");
+          }
+        } catch(err){
+          console.log(err);
+          alert('Coba Lagi, Berita Gagal Dihapus');
+        }
+      };
+      getDeleteNews();
     } else{
         async function getDeleteMessage() {
           try{
-              const tokenRespon = await axios.post(USER + "token", {
-                  userID: getUserID(),
-                  refreshToken: getRefToken()
+            const tokenRespon = await getToken();
+            if(tokenRespon === 400){
+                alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                logout();
+                history.replace("/");
+            } else{
+              const deleteContactRespon = await axios.delete(CONTACT + deleteItem, {
+                headers: { Authorization: `Bearer ${tokenRespon}`}
               });
-              const contactRespon = await axios.delete(CONTACT + deleteItem, {
-                  headers: { Authorization: `Bearer ${tokenRespon.data.token}`}
-              });
+              onSuccess(oldKey => oldKey +1);
+              closeModalDelete();
               console.log("Pesan Berhasil Dihapus");
-              history.push("/berita");
+              alert("Pesan Berhasil Dihapus");
+            }
           } catch(err){
-              console.log(err);
+            console.log(err);
+            alert('Coba Lagi, Pesan Gagal Dihapus');
           }
-      };
-      getDeleteMessage();
-    }
+        };
+        getDeleteMessage();
+      }
   };
   return (
     <>
@@ -41,7 +69,7 @@ const ModalDelete = ({closeModalDelete, deleteItem, nameItem, modal}) => {
             {/*header*/}
             <div className="p-6 pt-0 text-center">
                 <svg className="mx-auto mb-4 w-24 h-24 text-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <h3 className="mb-2 text-lg font-bold text-grey">"{nameItem}"</h3>
+                <h3 className="mb-2 text-lg font-bold text-grey capitalize">"{nameItem}"</h3>
                 <h3 className="mb-5 text-lg font-normal text-grey">Apakah anda yakin ingin menghapus item ini?</h3>
                 <button className="text-white bg-red hover:bg-darkRed focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-4"
                     onClick={() => handleDelete()}

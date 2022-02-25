@@ -84,12 +84,12 @@ const PostNews = () => {
                     headers: { Authorization: `Bearer ${tokenRespon}`}
                 });
                 console.log(postingRespon.data);
-                alert("Berita berhasil diposting!");
+                alert("Berita berhasil disimpan!");
                 history.replace('/berita');
             }
         } catch(err){
             console.log(err);
-            alert("Berita gagal diposting!");
+            alert("Berita gagal disimpan!");
         }
     }
 
@@ -136,7 +136,7 @@ const PostNews = () => {
                                     onFilesChangeEn={onFilesChangeEn}
                                 />
                             </div>
-                            <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Sumbit</button>
+                            <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>
                         </div>
                     </div>
                 </div>
