@@ -96,8 +96,8 @@ const ChangePassword = () => {
                         />
                         <div id="iconPassword">
                           <img
-                            alt={isRevealPwd ? "Hide password" : "Show password"}
-                            src={isRevealPwd ? showOffIcon : showIcon}
+                            alt={isRevealPwd ? "Show password" : "Hide password"}
+                            src={isRevealPwd ? showIcon : showOffIcon}
                             onClick={() => setIsRevealPwd(prevState => !prevState)}
                           />
                         </div>
@@ -113,8 +113,8 @@ const ChangePassword = () => {
                         />
                         <div id="iconPassword">
                           <img
-                            alt={isRevealPwdNew ? "Hide password" : "Show password"}
-                            src={isRevealPwdNew ? showOffIcon : showIcon}
+                            alt={isRevealPwdNew ? "Show password" : "Hide password"}
+                            src={isRevealPwdNew ? showIcon : showOffIcon}
                             onClick={() => setIsRevealPwdNew(prevState => !prevState)}
                           />
                         </div>
@@ -130,8 +130,8 @@ const ChangePassword = () => {
                         />
                         <div id="iconPassword">
                           <img
-                            alt={isRevealConfirmPwd ? "Hide password" : "Show password"}
-                            src={isRevealConfirmPwd ? showOffIcon : showIcon}
+                            alt={isRevealConfirmPwd ? "Show password" : "Hide password"}
+                            src={isRevealConfirmPwd ? showIcon : showOffIcon}
                             onClick={() => setIsRevealConfirmPwd(prevState => !prevState)}
                           />
                         </div>

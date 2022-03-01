@@ -5,6 +5,7 @@ import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import ModalDelete from './ModalDelete';
 import Table from "./Table";
+import '../../../assets/styles/Pagination.css';
 import { CONTACT } from "../../utils/Url";
 import { getToken, logout } from '../../utils/Auth';
 import axios from 'axios';
@@ -17,6 +18,66 @@ export default function MessageCardTable(props) {
     const [deleteItem, setDeleteItem] = useState();
     const [nameItem, setNameItem] = useState();
     const [edit, setEdit] = useState();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
+    const [pageNumberLimit, setPageNumberLimit] = useState(5);
+    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+    const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+
+    const pages =[];
+    for(let i = 1; i <= Math.ceil(apiData.length/itemsPerPage); i++){
+        pages.push(i);
+    }
+
+    const indexOfLastItem = currentPage*itemsPerPage; 
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = apiData.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handleClick = (event) => {
+        setCurrentPage(Number(event.target.id));
+    };
+
+    const handlePrevBtn = () => {
+        setCurrentPage(currentPage - 1);
+
+        if((currentPage - 1) % pageNumberLimit == 0){
+            setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+            setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+        }
+    };
+
+    const handleNextBtn = () => {
+        setCurrentPage(currentPage + 1);
+
+        if(currentPage+1 > maxPageNumberLimit){
+            setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+            setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+        }
+    };
+
+    let pageIncrementBtn = null;
+    if(pages.length > maxPageNumberLimit){
+        pageIncrementBtn= <li onClick={handleNextBtn}>&hellip;</li>
+    }
+
+    let pageDecrementBtn = null;
+    if(minPageNumberLimit >= 1){
+        pageDecrementBtn= <li onClick={handlePrevBtn}>&hellip;</li>
+    }
+
+    const renderPageNumbers = pages.map(number => {
+        if(number < maxPageNumberLimit+1 && number > minPageNumberLimit){
+            return(
+                <li key={number} id={number} onClick={handleClick} className={currentPage == number ? "active" : null}>
+                    {number}
+                </li>
+            );
+        } else {
+            return null;
+        }
+    })
 
     useEffect(() => {
         async function getContact() {
@@ -56,7 +117,7 @@ export default function MessageCardTable(props) {
                                 <th className="py-3 px-6 text-center text-sm font-normal text-blue">Actions</th>
                             </tr>
                         </thead>
-                        {apiData.map((value, index) => (
+                        {currentItems.map((value, index) => (
                             // <Table
                             //     key={value._id}
                             //     id={value._id}
@@ -119,6 +180,17 @@ export default function MessageCardTable(props) {
                         </tbody>
                         ))}
                     </table>
+                    <ul className="mt-8 pageNumbers flex justify-center">
+                        <li>
+                            <button onClick={handlePrevBtn} disabled={currentPage == pages[0] ? true : false}>Prev</button>
+                        </li>
+                            {pageDecrementBtn}
+                            {renderPageNumbers}
+                            {pageIncrementBtn}
+                        <li>
+                            <button onClick={handleNextBtn} disabled={currentPage == pages[pages.length - 1] ? true : false}>Next</button>
+                        </li>
+                    </ul>
                 </div>
             </CardBody>
         </Card>
