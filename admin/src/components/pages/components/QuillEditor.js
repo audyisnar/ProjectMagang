@@ -306,41 +306,45 @@ class QuillEditor extends React.Component {
         }        
     };
 
-    insertVideo = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
+    insertVideo = async (e) => {
+        try{
+            e.stopPropagation();
+            e.preventDefault();
 
-        if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length > 0) {
-            const file = e.currentTarget.files[0];
+            if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length > 0) {
+                const file = e.currentTarget.files[0];
+                console.log(file);
+                let formData = new FormData();
+                formData.append("files", file);
+                const tokenRespon = await getToken();
+                const insertVideoRespon = await axios.post(NEWS + "uploadvideos", formData, {
+                    headers: { Authorization: `Bearer ${tokenRespon}`}
+                });
+                if (insertVideoRespon.status === 200) {
+                    console.log(insertVideoRespon);
+                    this.setState({ apiData: insertVideoRespon.data });
+                    console.log("halo"+ insertVideoRespon.data[0].url);
+                    const quill = this.reactQuillRef.getEditor();
+                    quill.focus();
 
-            let formData = new FormData();
-            const config = {
-                header: { 'content-type': 'multipart/form-data' }
-            }
-            formData.append("file", file);
+                    let range = quill.getSelection();
+                    let position = range ? range.index : 0;
+                        
+                    quill.insertEmbed(position, "video", { src: "http://192.168.195.195:5000/" + insertVideoRespon.data[0].url, title: insertVideoRespon.data[0].fileName});
+                    quill.setSelection(position + 1);
 
-            axios.post('/api/blog/uploadfiles', formData, config)
-                .then(response => {
-                    if (response.data.success) {
-
-                        const quill = this.reactQuillRef.getEditor();
-                        quill.focus();
-
-                        let range = quill.getSelection();
-                        let position = range ? range.index : 0;
-                        quill.insertEmbed(position, "video", { src: "http://192.168.195.195:5000/" + response.data.url, title: response.data.fileName });
-                        quill.setSelection(position + 1);
-
-                        if (this._isMounted) {
-                            this.setState({
-                                files: [...this.state.files, file]
-                            }, () => { this.props.onFilesChange(this.state.files) });
-                        }
-                    } else {
-                        return alert('failed to upload file')
+                    if (this._isMounted) {
+                        this.setState({
+                            files: [...this.state.files, file]
+                        }, () => { this.props.onFilesChange(this.state.files) });
                     }
-                })
-        }
+                } else {
+                    return alert('failed to upload file')
+                }
+            }
+        } catch(err){
+            console.log(err);
+        } 
     }
 
     insertFile = (e) => {
