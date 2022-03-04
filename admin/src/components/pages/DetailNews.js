@@ -20,12 +20,12 @@ const DetailNews = () => {
                     logout();
                     history.replace("/");
                 } else{
-                    const contactRespon = await axios.get(NEWS + id, {
+                    const newsRespon = await axios.get(NEWS + id, {
                         headers: { Authorization: `Bearer ${tokenRespon}`}
                     });
-                    setApiData(contactRespon.data.contents);
-                    console.log(contactRespon.data);
-                    console.log(contactRespon.data.contents[0].data);
+                    setApiData(newsRespon.data.contents);
+                    console.log(newsRespon.data);
+                    console.log(newsRespon.data.contents[0].data);
                 }                
             } catch(err){
                 console.log(err);

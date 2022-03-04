@@ -109,7 +109,7 @@ export default function NewsCardTable(props) {
         getContact();
     },[refreshData]);
 
-    const publishNews = () => {
+    const publishNews = async () => {
 
     };
 
@@ -160,12 +160,17 @@ export default function NewsCardTable(props) {
                                 </td>
                                 <td className="py-3 px-6 text-center">
                                     <div className="flex item-center justify-center">
-                                        <Link className={value.publish === 0 ? "flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer" : "hidden"}
+                                        {/* <Link className={value.publish === 0 ? "flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer" : "hidden"}
                                             onClick={publishNews}
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                             </svg>
+                                        </Link> */}
+                                        <Link className={value.publish === 0 ? "flex justify-center items-center rounded-full mr-2 px-2 bg-blue hover:bg-darkBlue text-white text-xs cursor-pointer" : "hidden"}
+                                            onClick={publishNews}
+                                        >
+                                            <p>PUBLISH</p>
                                         </Link>
                                         <Link className={value.publish === 1 ? "flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer" : "hidden"}
                                             onClick={draftNews}
@@ -183,7 +188,7 @@ export default function NewsCardTable(props) {
                                             </svg>
                                         </Link>
                                         <Link className="flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-green hover:text-white hover:scale-110 cursor-pointer"
-                                            to={`/edit-berita`}
+                                            to={`/edit-berita/${value.slug}`}
                                         >
                                             <svg className="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
