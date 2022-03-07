@@ -22,6 +22,7 @@ export default function NewsCardTable(props) {
     const [apiData, setApiData] = useState([]);
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [refreshData, setRefreshData] = useState(0);
+    const [refresh, setRefresh] = useState(0);
     const [deleteItem, setDeleteItem] = useState();
     const [nameItem, setNameItem] = useState();
     const [edit, setEdit] = useState();
@@ -107,14 +108,54 @@ export default function NewsCardTable(props) {
             }
         };
         getContact();
-    },[refreshData]);
+    },[refreshData, refresh]);
 
-    const publishNews = async () => {
-
+    const publishNews = async (id) => {
+        try{
+            const tokenRespon = await getToken();
+            if(tokenRespon === 400){
+                alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                logout();
+                history.replace("/");
+            } else{
+                const variables = {
+                    newspostID: id
+                }
+                const newsRespon = await axios.post(NEWS + "publish", variables, {
+                    headers: { Authorization: `Bearer ${tokenRespon}`}
+                });
+                setRefresh(refresh+1);
+                alert("Berita berhasil dipublish");
+                console.log(newsRespon.data);
+            }
+        } catch(err){
+            alert("Berita gagal dipublish!");
+            console.log(err);
+        }
     };
 
-    const draftNews = () => {
-
+    const draftNews = async (id) => {
+        try{
+            const tokenRespon = await getToken();
+            if(tokenRespon === 400){
+                alert("Authentifikasi Gagal, Silahkan Login Kembali");
+                logout();
+                history.replace("/");
+            } else{
+                const variables = {
+                    newspostID: id
+                }
+                const newsRespon = await axios.post(NEWS + "draft", variables, {
+                    headers: { Authorization: `Bearer ${tokenRespon}`}
+                });
+                setRefresh(refresh+1);
+                alert("Berita berhasil disimpan di draft");
+                console.log(newsRespon.data);
+            }
+        } catch(err){
+            alert("Berita gagal disimpan di draft!");
+            console.log(err);
+        }
     };
 
     return (
@@ -168,16 +209,21 @@ export default function NewsCardTable(props) {
                                             </svg>
                                         </Link> */}
                                         <Link className={value.publish === 0 ? "flex justify-center items-center rounded-full mr-2 px-2 bg-blue hover:bg-darkBlue text-white text-xs cursor-pointer" : "hidden"}
-                                            onClick={publishNews}
+                                            onClick={() => publishNews(value._id)}
                                         >
                                             <p>PUBLISH</p>
                                         </Link>
-                                        <Link className={value.publish === 1 ? "flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer" : "hidden"}
+                                        {/* <Link className={value.publish === 1 ? "flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer" : "hidden"}
                                             onClick={draftNews}
                                         >
                                             <svg className="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                                             </svg>
+                                        </Link> */}
+                                        <Link className={value.publish === 1 ? "flex justify-center items-center rounded-full mr-2 px-2 bg-lightGrey hover:bg-darkGrey text-white text-xs cursor-pointer" : "hidden"}
+                                            onClick={() => draftNews(value._id)}
+                                        >
+                                            <p>DRAFT</p>
                                         </Link>
                                         <Link className="flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-blue hover:text-white hover:scale-110 cursor-pointer"
                                             to={`/detail-berita/${value.slug}`}
