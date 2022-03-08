@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ModalDelete from './ModalDelete';
+import ModalDelete from './PopUpModal';
 
 const Table = (props) => {
     const [showModalDelete, setShowModalDelete] = useState(false);

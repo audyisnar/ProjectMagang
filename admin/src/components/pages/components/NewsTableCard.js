@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
-import ModalDelete from './ModalDelete';
+import PopUpModal from './PopUpModal';
 import Table from "./Table";
 import '../../../assets/styles/Pagination.css';
 import { NEWS } from "../../utils/Url";
@@ -20,12 +20,12 @@ export default function NewsCardTable(props) {
 
     const history = useHistory();
     const [apiData, setApiData] = useState([]);
-    const [showModalDelete, setShowModalDelete] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [refreshData, setRefreshData] = useState(0);
     const [refresh, setRefresh] = useState(0);
-    const [deleteItem, setDeleteItem] = useState();
+    const [idItem, setIdItem] = useState();
     const [nameItem, setNameItem] = useState();
-    const [edit, setEdit] = useState();
+    const [flag, setFlag] = useState();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -108,7 +108,7 @@ export default function NewsCardTable(props) {
             }
         };
         getContact();
-    },[refreshData, refresh]);
+    },[refreshData]);
 
     const publishNews = async (id) => {
         try{
@@ -209,7 +209,13 @@ export default function NewsCardTable(props) {
                                             </svg>
                                         </Link> */}
                                         <Link className={value.publish === 0 ? "flex justify-center items-center rounded-full mr-2 px-2 bg-blue hover:bg-darkBlue text-white text-xs cursor-pointer" : "hidden"}
-                                            onClick={() => publishNews(value._id)}
+                                            //onClick={() => publishNews(value._id)}
+                                            onClick={() => {
+                                                setShowModal(true);
+                                                setIdItem(value._id);
+                                                setNameItem(value.contents[0].title);
+                                                setFlag(value.publish);
+                                            }}
                                         >
                                             <p>PUBLISH</p>
                                         </Link>
@@ -221,7 +227,13 @@ export default function NewsCardTable(props) {
                                             </svg>
                                         </Link> */}
                                         <Link className={value.publish === 1 ? "flex justify-center items-center rounded-full mr-2 px-2 bg-lightGrey hover:bg-darkGrey text-white text-xs cursor-pointer" : "hidden"}
-                                            onClick={() => draftNews(value._id)}
+                                            //onClick={() => draftNews(value._id)}
+                                            onClick={() => {
+                                                setShowModal(true);
+                                                setIdItem(value._id);
+                                                setNameItem(value.contents[0].title);
+                                                setFlag(value.publish);
+                                            }}
                                         >
                                             <p>DRAFT</p>
                                         </Link>
@@ -242,10 +254,10 @@ export default function NewsCardTable(props) {
                                         </Link>
                                         <div className="flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-red hover:text-white hover:scale-110 cursor-pointer"
                                             onClick={() => {
-                                                setShowModalDelete(true);
-                                                setDeleteItem(value._id);
+                                                setShowModal(true);
+                                                setIdItem(value._id);
                                                 setNameItem(value.name);
-                                                setEdit(true);
+                                                setFlag(true);
                                             }}
                                         >
                                             <svg className="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -255,7 +267,7 @@ export default function NewsCardTable(props) {
                                     </div>
                                 </td>
                             </tr>
-                            {showModalDelete && <ModalDelete closeModalDelete={setShowModalDelete} onSuccess={setRefreshData} deleteItem={deleteItem} nameItem={nameItem} edit={edit}/>}
+                            {showModal && <PopUpModal closeModal={setShowModal} onSuccess={setRefreshData} idItem={idItem} nameItem={nameItem} flag={flag}/>}
                         </tbody>
                     ))}
                 </table>
