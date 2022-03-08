@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
-import ModalDelete from './ModalDelete';
+import ModalDelete from './PopUpModal';
 import Table from "./Table";
 import '../../../assets/styles/Pagination.css';
 import { CONTACT } from "../../utils/Url";
@@ -15,9 +15,9 @@ export default function MessageCardTable(props) {
     const [apiData, setApiData] = useState([]);
     const [refreshData, setRefreshData] = useState(0);
     const [showModalDelete, setShowModalDelete] = useState(false);
-    const [deleteItem, setDeleteItem] = useState();
+    const [idItem, setIdItem] = useState();
     const [nameItem, setNameItem] = useState();
-    const [edit, setEdit] = useState();
+    const [flag, setFlag] = useState();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -111,9 +111,9 @@ export default function MessageCardTable(props) {
                     <table className="min-w-max w-full bg-transparent border-collapse">
                         <thead>
                             <tr className="border-b border-solid border-grey-200 whitespace-nowrap">
-                                <th className="py-3 px-6 text-left text-sm font-normal text-blue">No</th>
+                                {/* <th className="py-3 px-6 text-left text-sm font-normal text-blue">No</th> */}
                                 <th className="py-3 px-6 text-left text-sm font-normal text-blue">Name</th>
-                                <th className="py-3 px-6 text-center text-sm font-normal text-blue">Company</th>
+                                <th className="py-3 px-6 text-center text-sm font-normal text-blue">Email</th>
                                 <th className="py-3 px-6 text-center text-sm font-normal text-blue">Actions</th>
                             </tr>
                         </thead>
@@ -128,14 +128,14 @@ export default function MessageCardTable(props) {
                             // />
                         <tbody className="text-grey text-sm font-normal">
                             <tr className="border-b border-grey-200 hover:bg-secondary">
-                                <td className="py-3 px-6 text-left whitespace-nowrap">
+                                {/* <td className="py-3 px-6 text-left whitespace-nowrap">
                                     <span>{index+1}</span>
-                                </td>
+                                </td> */}
                                 <td className="py-3 px-6 text-left capitalize">
                                     <span>{value.name}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center capitalize">
-                                    <span>{value.company}</span>
+                                    <span>{value.email}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center">
                                     <div className="flex item-center justify-center">
@@ -164,9 +164,9 @@ export default function MessageCardTable(props) {
                                         <div className="flex justify-center items-center rounded-full w-5 h-5 mr-2 transform hover:bg-red hover:text-white hover:scale-110 cursor-pointer"
                                             onClick={() => {
                                                 setShowModalDelete(true);
-                                                setDeleteItem(value._id);
+                                                setIdItem(value._id);
                                                 setNameItem(value.name);
-                                                setEdit(false);
+                                                setFlag(false);
                                             }}
                                         >
                                             <svg className="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,7 +176,7 @@ export default function MessageCardTable(props) {
                                     </div>
                                 </td>
                             </tr>
-                            {showModalDelete && <ModalDelete closeModalDelete={setShowModalDelete} onSuccess={setRefreshData} deleteItem={deleteItem} nameItem={nameItem} edit={edit}/>}
+                            {showModalDelete && <ModalDelete closeModal={setShowModalDelete} onSuccess={setRefreshData} idItem={idItem} nameItem={nameItem} flag={flag}/>}
                         </tbody>
                         ))}
                     </table>
