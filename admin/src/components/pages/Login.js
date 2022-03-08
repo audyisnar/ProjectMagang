@@ -85,8 +85,8 @@ const Login = () => {
                     <img
                       // alt={isRevealPwd ? "Hide password" : "Show password"}
                       // src={isRevealPwd ? showOffIcon : showIcon}
-                      alt={isRevealPwd ? "Show password" : "Hide password"}
-                      src={isRevealPwd ? showIcon : showOffIcon}
+                      alt={isRevealPwd ? "Hide password" : "Show password"}
+                      src={isRevealPwd ? showOffIcon : showIcon}
                       onClick={() => setIsRevealPwd(prevState => !prevState)}
                     />
                   </div>

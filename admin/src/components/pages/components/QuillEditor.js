@@ -407,9 +407,9 @@ class QuillEditor extends React.Component {
                         <img src={Video} alt="Icon Video"/>
                     </button>
                     <button className="ql-video" />
-                    <button className="ql-insertFile">
+                    {/* <button className="ql-insertFile">
                         <img src={File} alt="Icon File"/>
-                    </button>
+                    </button> */}
                     <button className="ql-link" />
                     <button className="ql-code-block" />
                     <button className="ql-blockquote" />          
@@ -449,7 +449,9 @@ class QuillEditor extends React.Component {
         'header',
         'bold', 'italic', 'underline', 'strike',
         'list', 'align',
-        'image', 'video', "video", 'file', 'link', "code-block", "blockquote"
+        'image', 'video', "video", 
+        //'file', 
+        'link', "code-block", "blockquote"
     ];
 }
 
