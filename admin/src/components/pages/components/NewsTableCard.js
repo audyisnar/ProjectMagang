@@ -168,7 +168,7 @@ export default function NewsCardTable(props) {
                 <table className="min-w-max w-full bg-transparent border-collapse">
                     <thead>
                         <tr className="border-b border-solid border-grey-200 whitespace-nowrap">
-                            <th className="py-3 px-6 text-left text-sm font-normal text-blue">No</th>
+                            {/* <th className="py-3 px-6 text-left text-sm font-normal text-blue">No</th> */}
                             <th className="py-3 px-6 text-left text-sm font-normal text-blue">Title</th>
                             <th className="py-3 px-6 text-center text-sm font-normal text-blue">Publish Date</th>
                             <th className="py-3 px-6 text-center text-sm font-normal text-blue">Status</th>
@@ -187,9 +187,9 @@ export default function NewsCardTable(props) {
                         // />
                         <tbody className="text-grey text-sm font-normal">
                             <tr className="border-b border-grey-200 hover:bg-secondary" key={value._id}>
-                                <td className="py-3 px-6 text-left whitespace-nowrap">
+                                {/* <td className="py-3 px-6 text-left whitespace-nowrap">
                                     <span>{index+1}</span>
-                                </td>
+                                </td> */}
                                 <td className="py-3 px-6 text-left capitalize">
                                     <span>{value.contents[0].title}</span>
                                 </td>

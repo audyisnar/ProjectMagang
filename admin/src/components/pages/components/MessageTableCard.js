@@ -111,9 +111,9 @@ export default function MessageCardTable(props) {
                     <table className="min-w-max w-full bg-transparent border-collapse">
                         <thead>
                             <tr className="border-b border-solid border-grey-200 whitespace-nowrap">
-                                <th className="py-3 px-6 text-left text-sm font-normal text-blue">No</th>
+                                {/* <th className="py-3 px-6 text-left text-sm font-normal text-blue">No</th> */}
                                 <th className="py-3 px-6 text-left text-sm font-normal text-blue">Name</th>
-                                <th className="py-3 px-6 text-center text-sm font-normal text-blue">Company</th>
+                                <th className="py-3 px-6 text-center text-sm font-normal text-blue">Email</th>
                                 <th className="py-3 px-6 text-center text-sm font-normal text-blue">Actions</th>
                             </tr>
                         </thead>
@@ -128,14 +128,14 @@ export default function MessageCardTable(props) {
                             // />
                         <tbody className="text-grey text-sm font-normal">
                             <tr className="border-b border-grey-200 hover:bg-secondary">
-                                <td className="py-3 px-6 text-left whitespace-nowrap">
+                                {/* <td className="py-3 px-6 text-left whitespace-nowrap">
                                     <span>{index+1}</span>
-                                </td>
+                                </td> */}
                                 <td className="py-3 px-6 text-left capitalize">
                                     <span>{value.name}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center capitalize">
-                                    <span>{value.company}</span>
+                                    <span>{value.email}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center">
                                     <div className="flex item-center justify-center">
