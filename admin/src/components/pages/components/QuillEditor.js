@@ -227,6 +227,10 @@ class QuillEditor extends React.Component {
         this._isMounted = false;
     }
 
+    handleContentChange = event => {
+        this.props.onContentChange(event)
+    }
+
     handleChange = (html) => {
         console.log('html', html)
         // https://youtu.be/BbR-QCoKngE
@@ -417,10 +421,10 @@ class QuillEditor extends React.Component {
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
-                    onChange={this.handleChange}
+                    onChange={this.handleContentChange}
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.state.editorHtml}
+                    value={this.props.content}
                     placeholder={this.props.placeholder}
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
