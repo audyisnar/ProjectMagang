@@ -61,10 +61,12 @@ const EditNews = () => {
                     setTitleId(newsRespon.data.contents[0].title);
                     setTitleEn(newsRespon.data.contents[1].title);
                     //setContentId(newsRespon.data.contents[0].data);
+                    localStorage.setItem("NEWS_ID", newsRespon.data.contents[0].data);
+                    localStorage.setItem("NEWS_EN", newsRespon.data.contents[1].data);
                     onEditorChange(newsRespon.data.contents[0].data);
                     //setApiData(newsRespon.data.contents);
-                    console.log(contentId);
-                    console.log(newsRespon.data);
+                    ///console.log(contentId);
+                    //console.log(newsRespon.data);
                     //console.log(newsRespon.data.contents[0].data);
                 }                
             } catch(err){
@@ -73,6 +75,7 @@ const EditNews = () => {
         };
         getNewsId();
     },[]);
+    console.log(contentId)
         // axios
         //     .get(RECIPES + id, config)
         //     .then((res) => {
@@ -95,7 +98,7 @@ const EditNews = () => {
         //         console.log(err);
         //     }); 
 
-    const onEditorChange = (value) => {
+    const onEditorChange = async (value) => {
         console.log("value : ", value)
         setContentId(value)
     }
@@ -196,6 +199,8 @@ const EditNews = () => {
                                     placeholder={"Mulai Posting Berita!"}
                                     onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
+                                    flag={"edit"}
+                                    id={contentId}
                                 />
                             </div>
                             <div className="space-y-4">
@@ -212,6 +217,8 @@ const EditNews = () => {
                                     placeholder={"Start Posting News!"}
                                     onEditorChangeEn={onEditorChangeEn}
                                     onFilesChangeEn={onFilesChangeEn}
+                                    flagEn={"edit"}
+                                    idEn={id}
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>

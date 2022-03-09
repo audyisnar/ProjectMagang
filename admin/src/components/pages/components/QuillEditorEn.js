@@ -201,14 +201,28 @@ class QuillEditorEn extends React.Component {
     onFilesChangeEn;
     onPollsChange;
     _isMounted;
+    flagEn;
+    idEn;
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
-            files: [],
-        };
+        console.log(this.props.flagEn)
+        console.log(this.props.idEn)
+
+        if(this.props.flag === "post"){
+            this.state = {
+                editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
+                files: [],
+                apiData: [],
+            };
+        } else {
+            this.state = {
+                editorHtml: localStorage.getItem("NEWS_EN"),
+                files: [],
+                apiData: [],
+            };
+        }
 
         this.reactQuillRef = null;
 

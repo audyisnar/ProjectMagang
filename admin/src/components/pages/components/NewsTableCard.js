@@ -90,6 +90,8 @@ export default function NewsCardTable(props) {
     useEffect(() => {
         async function getContact() {
             try{
+                localStorage.removeItem("NEWS_ID");
+                localStorage.removeItem("NEWS_EN");
                 const tokenRespon = await getToken();
                 if(tokenRespon === 400){
                     alert("Authentifikasi Gagal, Silahkan Login Kembali");

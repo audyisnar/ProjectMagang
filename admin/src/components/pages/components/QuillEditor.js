@@ -202,15 +202,30 @@ class QuillEditor extends React.Component {
     onFilesChange;
     onPollsChange;
     _isMounted;
+    flag;
+    id;
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
-            files: [],
-            apiData: [],
-        };
+        console.log(this.props.flag)
+        console.log(this.props.id);
+
+        console.log(this.contentNews)
+
+        if(this.props.flag === "post"){
+            this.state = {
+                editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
+                files: [],
+                apiData: [],
+            };
+        } else {
+            this.state = {
+                editorHtml: localStorage.getItem("NEWS_ID"),
+                files: [],
+                apiData: [],
+            };
+        }
         
         this.reactQuillRef = null;
 
@@ -422,6 +437,8 @@ class QuillEditor extends React.Component {
                     formats={this.formats}
                     value={this.state.editorHtml}
                     placeholder={this.props.placeholder}
+                    flag={this.props.flag}
+                    id={this.props.id}
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />

@@ -118,6 +118,7 @@ const PostNews = () => {
                                     placeholder={"Mulai Posting Berita!"}
                                     onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
+                                    flag={"post"}
                                 />
                             </div>
                             <div className="space-y-4">
@@ -134,6 +135,7 @@ const PostNews = () => {
                                     placeholder={"Start Posting News!"}
                                     onEditorChangeEn={onEditorChangeEn}
                                     onFilesChangeEn={onFilesChangeEn}
+                                    flagEn={"post"}
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>
