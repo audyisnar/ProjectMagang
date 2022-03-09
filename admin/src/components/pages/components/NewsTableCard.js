@@ -256,7 +256,7 @@ export default function NewsCardTable(props) {
                                             onClick={() => {
                                                 setShowModal(true);
                                                 setIdItem(value._id);
-                                                setNameItem(value.name);
+                                                setNameItem(value.contents[0].title);
                                                 setFlag(true);
                                             }}
                                         >

@@ -1,30 +1,3 @@
-// import React, { useState } from "react";
-// import Sidebar from "./components/Sidebar";
-
-// const EditNews = () => {
-//   return (
-//     <div>
-//         <Sidebar />
-//         <div className="md:ml-64">
-//             <div className="mt-8 px-6 md:px-8 h-auto">
-//                 <button>Kembali</button>
-//                 <div className="container mt-4 bg-secondary-500 mx-auto max-w-full">
-//                     <div>
-//                         Ini Halaman Edit Berita
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//   );
-// }
-
-// export default EditNews;
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
@@ -36,8 +9,9 @@ import axios from 'axios';
 
 const EditNews = () => {
     const history = useHistory();
-    const { id } = useParams();
+    const { slug } = useParams();
 
+    const [ID, setID] = useState("");
     const [urlThumbnail, setUrlThumbnail] = useState("");
     const [titleId, setTitleId] = useState("");
     const [titleEn, setTitleEn] = useState("");
@@ -54,10 +28,11 @@ const EditNews = () => {
                 logout();
                 history.replace("/");
             } else {
-                const newsRespon = await axios.get(NEWS + id, {
+                const newsRespon = await axios.get(NEWS + slug, {
                     headers: { Authorization: `Bearer ${tokenRespon}` }
                 });
-
+                setUrlThumbnail(newsRespon.data.thumbnailURL);
+                setID(newsRespon.data._id);
                 setTitleId(newsRespon.data.contents[0].title);
                 setContentId(newsRespon.data.contents[0].data)
             }
@@ -74,7 +49,7 @@ const EditNews = () => {
                 logout();
                 history.replace("/");
             } else {
-                const newsRespon = await axios.get(NEWS + id, {
+                const newsRespon = await axios.get(NEWS + slug, {
                     headers: { Authorization: `Bearer ${tokenRespon}` }
                 });
 
@@ -90,27 +65,6 @@ const EditNews = () => {
         getNewsId();
         getNewsEn();
     }, []);
-    // axios
-    //     .get(RECIPES + id, config)
-    //     .then((res) => {
-    //         console.log(res);
-    //         console.log(res.data);
-    //         console.log(res.data[0].cholesterol);
-    //         setPublishDate(res.data[0].publish_date);
-    //         setName(res.data[0].name);
-    //         setMadeBy(res.data[0].made_by);
-    //         setCategory(res.data[0].category);
-    //         setCalory(res.data[0].total_calory);
-    //         setEater(res.data[0].total_eater);
-    //         setDuration(res.data[0].duration);
-    //         setLevel(res.data[0].level_of_difficult);
-    //         setCompositions(res.data[0].compositions);
-    //         setSteps(res.data[0].steps_of_make);
-    //         setDescription(res.data[0].short_description);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     }); 
 
     const onEditorChange = (value) => {
         console.log("value : ", value)
@@ -171,20 +125,21 @@ const EditNews = () => {
                 ];
 
                 const variables = {
+                    _id: ID,
                     thumbnailURL: urlThumbnail,
                     contents: dataNews
                 }
 
-                const postingRespon = await axios.post(NEWS, variables, {
+                const postingRespon = await axios.post(NEWS + "update", variables, {
                     headers: { Authorization: `Bearer ${tokenRespon}` }
                 });
                 console.log(postingRespon.data);
-                alert("Berita berhasil disimpan!");
+                alert("Berita berhasil diubah!");
                 history.replace('/berita');
             }
         } catch (err) {
             console.log(err);
-            alert("Berita gagal disimpan!");
+            alert("Berita gagal diubah!");
         }
     }
 
@@ -211,10 +166,10 @@ const EditNews = () => {
                                 </div>
                                 <QuillEditor
                                     content={contentId}
-                                    toolbarId={"#toolbarId"}
+                                    toolbarId={"toolbarId"}
                                     onContentChange={setContentId}
                                     placeholder={"Mulai Posting Berita!"}
-                                    onEditorChange={onEditorChange}
+                                    //onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
                                 />
                             </div>
@@ -228,16 +183,16 @@ const EditNews = () => {
                                         value={titleEn} onChange={(e) => setTitleEn(e.target.value)}
                                     />
                                 </div>
-                                <QuillEditorEn
+                                <QuillEditor
                                     content={contentEn}
-                                    toolbarId={"#toolbarEn"}
+                                    toolbarId={"toolbarEn"}
                                     onContentChange={setContentEn}
                                     placeholder={"Start Posting News!"}
-                                    onEditorChangeEn={onEditorChangeEn}
-                                    onFilesChangeEn={onFilesChangeEn}
+                                    //onEditorChangeEn={onEditorChangeEn}
+                                    onFilesChange={onFilesChangeEn}
                                 />
                             </div>
-                            <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>
+                            <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Simpan</button>
                         </div>
                     </div>
                 </div>

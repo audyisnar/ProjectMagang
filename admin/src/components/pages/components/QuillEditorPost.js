@@ -207,6 +207,11 @@ class QuillEditor extends React.Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props.flag)
+        console.log(this.props.id);
+
+        console.log(this.contentNews)
+
         this.state = {
             editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
             files: [],
@@ -226,12 +231,6 @@ class QuillEditor extends React.Component {
 
     componentWillUnmount() {
         this._isMounted = false;
-    }
-
-    handleContentChange = event => {
-        this.props.onContentChange(event)
-
-        console.log(event);
     }
 
     handleChange = (html) => {
@@ -424,11 +423,13 @@ class QuillEditor extends React.Component {
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
-                    onChange={this.handleContentChange}
+                    onChange={this.handleChange}
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.props.content}
+                    value={this.state.editorHtml}
                     placeholder={this.props.placeholder}
+                    flag={this.props.flag}
+                    id={this.props.id}
                 />
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />

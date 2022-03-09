@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
-import QuillEditor from "./components/QuillEditor";
+import QuillEditor from "./components/QuillEditorPost";
 import QuillEditorEn from "./components/QuillEditorEn";
 import { NEWS } from "../utils/Url";
 import { logout, getToken } from '../utils/Auth';
@@ -115,6 +115,7 @@ const PostNews = () => {
                                     />
                                 </div>  
                                 <QuillEditor
+                                    toolbarId={"toolbarId"}
                                     placeholder={"Mulai Posting Berita!"}
                                     onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
@@ -130,10 +131,11 @@ const PostNews = () => {
                                     value={titleEn} onChange={(e) => setTitleEn(e.target.value)}
                                     />
                                 </div>  
-                                <QuillEditorEn
+                                <QuillEditor
+                                    toolbarId={"toolbarEn"}
                                     placeholder={"Start Posting News!"}
-                                    onEditorChangeEn={onEditorChangeEn}
-                                    onFilesChangeEn={onFilesChangeEn}
+                                    onEditorChange={onEditorChangeEn}
+                                    onFilesChange={onFilesChangeEn}
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>

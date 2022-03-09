@@ -52,7 +52,7 @@ export const APP_ROUTE = [
     },
     {
         name: "Edit Berita",
-        path: "/edit-berita/:id",
+        path: "/edit-berita/:slug",
         exact: true,
         component: EditBerita,
         private: true,
