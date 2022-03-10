@@ -233,9 +233,10 @@ class QuillEditor extends React.Component {
 
         console.log(event);
     }
-
+    
     handleChange = (html) => {
         console.log('html', html)
+        console.log(this.props.flag)
         // https://youtu.be/BbR-QCoKngE
         // https://www.youtube.com/embed/ZwKhufmMxko
         // https://tv.naver.com/v/9176888
@@ -421,15 +422,30 @@ class QuillEditor extends React.Component {
                     <button className="ql-code-block" />
                     <button className="ql-blockquote" />          
                 </div>
-                <ReactQuill
-                    ref={(el) => { this.reactQuillRef = el }}
-                    theme={'snow'}
-                    onChange={this.handleContentChange}
-                    modules={this.modules}
-                    formats={this.formats}
-                    value={this.props.content}
-                    placeholder={this.props.placeholder}
-                />
+                {
+                    this.props.flag === "post" &&
+                    <ReactQuill
+                        ref={(el) => { this.reactQuillRef = el }}
+                        theme={'snow'}
+                        onChange={this.handleChange}
+                        modules={this.modules}
+                        formats={this.formats}
+                        value={this.state.editorHtml}
+                        placeholder={this.props.placeholder}
+                    />
+                }
+                {
+                    this.props.flag === "edit" &&
+                    <ReactQuill
+                        ref={(el) => { this.reactQuillRef = el }}
+                        theme={'snow'}
+                        onChange={this.handleContentChange}
+                        modules={this.modules}
+                        formats={this.formats}
+                        value={this.props.content}
+                        placeholder={this.props.placeholder}
+                    />
+                }
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />
                 <input type="file" accept="*" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />

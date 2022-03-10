@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
-import QuillEditor from "./components/QuillEditorPost";
-import QuillEditorEn from "./components/QuillEditorEn";
+import QuillEditor from "./components/QuillEditor";
 import { NEWS } from "../utils/Url";
 import { logout, getToken } from '../utils/Auth';
 import axios from 'axios';
@@ -61,8 +60,6 @@ const PostNews = () => {
     }
 
     const onSubmit = async () => {
-        //setContent("");
-        //setContentEn("");
         try{
             const tokenRespon = await getToken();
             if(tokenRespon === 400){
@@ -119,6 +116,7 @@ const PostNews = () => {
                                     placeholder={"Mulai Posting Berita!"}
                                     onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
+                                    flag={"post"}
                                 />
                             </div>
                             <div className="space-y-4">
@@ -136,6 +134,7 @@ const PostNews = () => {
                                     placeholder={"Start Posting News!"}
                                     onEditorChange={onEditorChangeEn}
                                     onFilesChange={onFilesChangeEn}
+                                    flag={"post"}
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>

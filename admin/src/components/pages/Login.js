@@ -14,9 +14,6 @@ const Login = () => {
 
   const history = useHistory();
 
-  // const _onSubmit = () => {
-  //   history.push("/dashboard");
-  // };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -83,8 +80,6 @@ const Login = () => {
                   />
                   <div id="toggle">
                     <img
-                      // alt={isRevealPwd ? "Hide password" : "Show password"}
-                      // src={isRevealPwd ? showOffIcon : showIcon}
                       alt={isRevealPwd ? "Hide password" : "Show password"}
                       src={isRevealPwd ? showOffIcon : showIcon}
                       onClick={() => setIsRevealPwd(prevState => !prevState)}

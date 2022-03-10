@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import TableCard from './components/MessageTableCard';
 import Sidebar from "./components/Sidebar";
 import { NEWS } from "../utils/Url";
@@ -50,7 +50,6 @@ const DetailNews = () => {
             <Sidebar />
             <div className="md:ml-64">
                 <div className="mt-8 px-6 md:px-8 h-auto">
-                    {/* <button>Kembali</button> */}
                     {renderNews}
                 </div>
             </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
 import QuillEditor from "./components/QuillEditor";
-import QuillEditorEn from "./components/QuillEditorEn";
 import { NEWS } from "../utils/Url";
 import { logout, getToken } from '../utils/Auth';
 import axios from 'axios';
@@ -66,18 +65,8 @@ const EditNews = () => {
         getNewsEn();
     }, []);
 
-    const onEditorChange = (value) => {
-        console.log("value : ", value)
-        setContentId(value)
-    }
-
     const onFilesChange = (files) => {
         setFiles(files)
-    }
-
-    const onEditorChangeEn = (value) => {
-        setContentEn(value)
-        console.log(contentEn)
     }
 
     const onFilesChangeEn = (files) => {
@@ -110,8 +99,6 @@ const EditNews = () => {
     }
 
     const onSubmit = async () => {
-        //setContent("");
-        //setContentEn("");
         try {
             const tokenRespon = await getToken();
             if (tokenRespon === 400) {
@@ -169,8 +156,8 @@ const EditNews = () => {
                                     toolbarId={"toolbarId"}
                                     onContentChange={setContentId}
                                     placeholder={"Mulai Posting Berita!"}
-                                    //onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
+                                    flag={"edit"}
                                 />
                             </div>
                             <div className="space-y-4">
@@ -190,6 +177,7 @@ const EditNews = () => {
                                     placeholder={"Start Posting News!"}
                                     //onEditorChangeEn={onEditorChangeEn}
                                     onFilesChange={onFilesChangeEn}
+                                    flag={"edit"}
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Simpan</button>
