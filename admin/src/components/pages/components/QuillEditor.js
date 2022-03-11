@@ -7,7 +7,6 @@ import Image from "../../../assets/img/image.png";
 import { NEWS } from "../../utils/Url";
 import { getToken } from '../../utils/Auth';
 
-
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
@@ -236,7 +235,6 @@ class QuillEditor extends React.Component {
     
     handleChange = (html) => {
         console.log('html', html)
-        console.log(this.props.flag)
         // https://youtu.be/BbR-QCoKngE
         // https://www.youtube.com/embed/ZwKhufmMxko
         // https://tv.naver.com/v/9176888

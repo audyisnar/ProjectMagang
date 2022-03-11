@@ -25,7 +25,7 @@ const PopUpModal = ({closeModal, onSuccess, idItem, nameItem, flag}) => {
             onSuccess(oldKey => oldKey +1);
             closeModal();
             console.log("Berita Berhasil Dihapus");
-            alert("Berita Berhasil Dihapus");
+            //alert("Berita Berhasil Dihapus");
           }
         } catch(err){
           console.log(err);
@@ -48,7 +48,7 @@ const PopUpModal = ({closeModal, onSuccess, idItem, nameItem, flag}) => {
               onSuccess(oldKey => oldKey +1);
               closeModal();
               console.log("Pesan Berhasil Dihapus");
-              alert("Pesan Berhasil Dihapus");
+              //alert("Pesan Berhasil Dihapus");
             }
           } catch(err){
             console.log(err);
@@ -75,7 +75,7 @@ const PopUpModal = ({closeModal, onSuccess, idItem, nameItem, flag}) => {
             });
             onSuccess(oldKey => oldKey +1);
             closeModal();
-            alert("Berita berhasil dipublish");
+            //alert("Berita berhasil dipublish");
         }
     } catch(err){
         alert("Coba lagi, Berita gagal dipublish!");
@@ -99,7 +99,7 @@ const PopUpModal = ({closeModal, onSuccess, idItem, nameItem, flag}) => {
             });
             onSuccess(oldKey => oldKey +1);
             closeModal();
-            alert("Berita berhasil disimpan di draft");
+            //alert("Berita berhasil disimpan di draft");
         }
     } catch(err){
         alert("Coba Lagi, Berita gagal disimpan di draft!");

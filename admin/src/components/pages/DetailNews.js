@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import TableCard from './components/MessageTableCard';
+import '../../assets/styles/Components.css';
 import Sidebar from "./components/Sidebar";
 import { NEWS } from "../utils/Url";
 import { getToken, logout } from '../utils/Auth';
@@ -26,6 +27,7 @@ const DetailNews = () => {
                     setApiData(newsRespon.data.contents);
                     console.log(newsRespon.data);
                     console.log(newsRespon.data.contents[0].data);
+                    console.log(newsRespon.data.contents[1].data);
                 }                
             } catch(err){
                 console.log(err);
