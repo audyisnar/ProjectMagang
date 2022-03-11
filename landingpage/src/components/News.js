@@ -39,7 +39,7 @@ from the layout laying out pages with meaningle</p>
     <div className="d-flex flex-row justify-content-center">
           {/* <div className="contentNews"> */}
           {apiData.map((value, index) => (
-          <Link to="/detailNews" key={value._id} className="mx-auto w-25">
+          <Link to={`/detailNews/${value.slug}`} key={value._id} className="mx-auto w-25">
               <div className="d-flex justify-content-center align-items-center">
                 <img className="imageNews" src={`http://192.168.195.195:5000${value.thumbnailURL}`} alt="" />
               </div>

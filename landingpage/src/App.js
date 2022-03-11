@@ -8,6 +8,7 @@ import Service from './components/Service';
 import Contact from './components/Contact';
 import detailNews from './components/detailNews';
 
+
 function App() {
   return (
     <Router >
@@ -19,7 +20,7 @@ function App() {
             <Route path="/Profile" component={Profile}/>
             <Route path="/Service" component={Service}/>
             <Route path="/Contact" component={Contact}/>
-            <Route path="/detailNews" component={detailNews}/>
+            <Route path="/detailNews/:id" component={detailNews}/>
           </switch>
           <Footer />
         </div>
