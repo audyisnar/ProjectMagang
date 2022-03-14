@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import Service from './components/Service';
 import Contact from './components/Contact';
+import detailNews from './components/detailNews';
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
             <Route path="/Profile" component={Profile}/>
             <Route path="/Service" component={Service}/>
             <Route path="/Contact" component={Contact}/>
+            <Route path="/detailNews/:id" component={detailNews}/>
           </switch>
           <Footer />
         </div>

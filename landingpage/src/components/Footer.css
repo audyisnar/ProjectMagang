@@ -18,7 +18,11 @@
     /* padding: 24px; */
     color: #fff;
   }
-  
+  .footer-container .button{
+    margin-right: 100px;
+    padding-top: 200px;
+    
+  }
   /* .footer-subscription .started{
       justify-content: right;
       width : 150px;

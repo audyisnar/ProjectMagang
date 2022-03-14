@@ -19,7 +19,9 @@ function Footer() {
          Let-us now! we are help you.
         </p>
         </div>
-        <button type="button" className="btn text-white button-contact bg-danger" >Let's Meet Up</button>
+        <div className="d-flex allign-items-end">
+        <button type="button" className="btn text-white button-contact bg-danger w-15" >Let's Meet Up</button>
+        </div>
       </section>
       <div className='footer-links'>
       {/* <div className='footer-logo'>
