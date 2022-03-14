@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
 import QuillEditor from "./components/QuillEditor";
-import QuillEditorEn from "./components/QuillEditorEn";
 import { NEWS } from "../utils/Url";
 import { logout, getToken } from '../utils/Auth';
 import axios from 'axios';
@@ -16,6 +15,7 @@ const PostNews = () => {
     const [files, setFiles] = useState([]);
     const [contentEn, setContentEn] = useState("");
     const [filesEn, setFilesEn] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const onEditorChange = (value) => {
         setContentId(value)
@@ -48,6 +48,7 @@ const PostNews = () => {
                 logout();
                 history.replace("/");
             } else{
+                setLoading(true);
                 const uploadRespon = await axios.post(NEWS + "uploadthumbnail", formData, {
                     headers: { Authorization: `Bearer ${tokenRespon}`}
                 });
@@ -61,8 +62,6 @@ const PostNews = () => {
     }
 
     const onSubmit = async () => {
-        //setContent("");
-        //setContentEn("");
         try{
             const tokenRespon = await getToken();
             if(tokenRespon === 400){
@@ -79,7 +78,6 @@ const PostNews = () => {
                     thumbnailURL: urlThumbnail,
                     contents: dataNews
                 }
-
                 const postingRespon = await axios.post(NEWS, variables, {
                     headers: { Authorization: `Bearer ${tokenRespon}`}
                 });
@@ -102,6 +100,7 @@ const PostNews = () => {
                         <div className="mt-4 mb-10 p-14 bg-white shadow-xl space-y-10 rounded-xl mx-auto max-w-full">
                             <div className="space-y-4">
                                 <label className="text-netral text-md font-semibold tracking-wide" for="gambar">Upload Thumbnail</label><br/>
+                                <img src={`http://192.168.195.195:5000${urlThumbnail}`} className={loading ? "h-48 w-56" : "hidden"}/>
                                 <input type="file" name="thumbnail" onChange={handleUploadChange}/>
                             </div>
                             <div className="space-y-4">
@@ -115,6 +114,7 @@ const PostNews = () => {
                                     />
                                 </div>  
                                 <QuillEditor
+                                    toolbarId={"toolbarId"}
                                     placeholder={"Mulai Posting Berita!"}
                                     onEditorChange={onEditorChange}
                                     onFilesChange={onFilesChange}
@@ -131,11 +131,18 @@ const PostNews = () => {
                                     value={titleEn} onChange={(e) => setTitleEn(e.target.value)}
                                     />
                                 </div>  
-                                <QuillEditorEn
+                                <QuillEditor
+                                    toolbarId={"toolbarEn"}
                                     placeholder={"Start Posting News!"}
+<<<<<<< HEAD
                                     onEditorChangeEn={onEditorChangeEn}
                                     onFilesChangeEn={onFilesChangeEn}
                                     flagEn={"post"}
+=======
+                                    onEditorChange={onEditorChangeEn}
+                                    onFilesChange={onFilesChangeEn}
+                                    flag={"post"}
+>>>>>>> quilljs
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>

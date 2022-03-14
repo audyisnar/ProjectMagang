@@ -7,7 +7,6 @@ import Image from "../../../assets/img/image.png";
 import { NEWS } from "../../utils/Url";
 import { getToken } from '../../utils/Auth';
 
-
 import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
@@ -202,8 +201,12 @@ class QuillEditor extends React.Component {
     onFilesChange;
     onPollsChange;
     _isMounted;
+<<<<<<< HEAD
     flag;
     id;
+=======
+    toolbarId;
+>>>>>>> quilljs
 
     constructor(props) {
         super(props);
@@ -242,6 +245,12 @@ class QuillEditor extends React.Component {
         this._isMounted = false;
     }
 
+    handleContentChange = event => {
+        this.props.onContentChange(event)
+
+        console.log(event);
+    }
+    
     handleChange = (html) => {
         console.log('html', html)
         // https://youtu.be/BbR-QCoKngE
@@ -401,7 +410,7 @@ class QuillEditor extends React.Component {
     render() {
         return (
             <div>
-                <div id="toolbar">
+                <div id={this.props.toolbarId}>
                     <select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
                         <option value="1" />
                         <option value="2" />
@@ -429,6 +438,7 @@ class QuillEditor extends React.Component {
                     <button className="ql-code-block" />
                     <button className="ql-blockquote" />          
                 </div>
+<<<<<<< HEAD
                 <ReactQuill
                     ref={(el) => { this.reactQuillRef = el }}
                     theme={'snow'}
@@ -440,6 +450,32 @@ class QuillEditor extends React.Component {
                     flag={this.props.flag}
                     id={this.props.id}
                 />
+=======
+                {
+                    this.props.flag === "post" &&
+                    <ReactQuill
+                        ref={(el) => { this.reactQuillRef = el }}
+                        theme={'snow'}
+                        onChange={this.handleChange}
+                        modules={this.modules}
+                        formats={this.formats}
+                        value={this.state.editorHtml}
+                        placeholder={this.props.placeholder}
+                    />
+                }
+                {
+                    this.props.flag === "edit" &&
+                    <ReactQuill
+                        ref={(el) => { this.reactQuillRef = el }}
+                        theme={'snow'}
+                        onChange={this.handleContentChange}
+                        modules={this.modules}
+                        formats={this.formats}
+                        value={this.props.content}
+                        placeholder={this.props.placeholder}
+                    />
+                }
+>>>>>>> quilljs
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />
                 <input type="file" accept="*" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />
@@ -450,7 +486,7 @@ class QuillEditor extends React.Component {
     modules = {
         syntax: true,
         toolbar: {
-            container: "#toolbar",
+            container: `#${this.props.toolbarId}`,
             //id ="toorbar"는  그 위에 B I U S I V F P 이거 있는 곳이다. 
             handlers: {
                 insertImage: this.imageHandler,

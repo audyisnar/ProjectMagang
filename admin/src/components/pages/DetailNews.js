@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import TableCard from './components/MessageTableCard';
+import '../../assets/styles/Components.css';
 import Sidebar from "./components/Sidebar";
 import { NEWS } from "../utils/Url";
 import { getToken, logout } from '../utils/Auth';
@@ -26,6 +27,7 @@ const DetailNews = () => {
                     setApiData(newsRespon.data.contents);
                     console.log(newsRespon.data);
                     console.log(newsRespon.data.contents[0].data);
+                    console.log(newsRespon.data.contents[1].data);
                 }                
             } catch(err){
                 console.log(err);
@@ -39,7 +41,7 @@ const DetailNews = () => {
                     <div className="flex items-center justify-center bg-blue h-12">
                         <p className="text-xl text-white font-semibold">{value.title}</p>
                     </div>
-                    <div>
+                    <div id="content">
                         <div dangerouslySetInnerHTML={{ __html: value.data }} />
                     </div>
                 </div>
@@ -50,7 +52,6 @@ const DetailNews = () => {
             <Sidebar />
             <div className="md:ml-64">
                 <div className="mt-8 px-6 md:px-8 h-auto">
-                    {/* <button>Kembali</button> */}
                     {renderNews}
                 </div>
             </div>

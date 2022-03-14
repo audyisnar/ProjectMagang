@@ -50,7 +50,7 @@ export default function NewsCardTable(props) {
     const handlePrevBtn = () => {
         setCurrentPage(currentPage - 1);
 
-        if((currentPage - 1) % pageNumberLimit == 0){
+        if((currentPage - 1) % pageNumberLimit === 0){
             setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
             setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
         }
@@ -78,7 +78,7 @@ export default function NewsCardTable(props) {
     const renderPageNumbers = pages.map(number => {
         if(number < maxPageNumberLimit+1 && number > minPageNumberLimit){
             return(
-                <li key={number} id={number} onClick={handleClick} className={currentPage == number ? "active" : null}>
+                <li key={number} id={number} onClick={handleClick} className={currentPage === number ? "active" : null}>
                     {number}
                 </li>
             );
@@ -258,7 +258,7 @@ export default function NewsCardTable(props) {
                                             onClick={() => {
                                                 setShowModal(true);
                                                 setIdItem(value._id);
-                                                setNameItem(value.name);
+                                                setNameItem(value.contents[0].title);
                                                 setFlag(true);
                                             }}
                                         >
@@ -273,15 +273,15 @@ export default function NewsCardTable(props) {
                         </tbody>
                     ))}
                 </table>
-                <ul className="mt-8 pageNumbers flex justify-center">
+                <ul className="mt-8 mb-8 pageNumbers flex justify-center">
                     <li>
-                        <button onClick={handlePrevBtn} disabled={currentPage == pages[0] ? true : false}>Prev</button>
+                        <button onClick={handlePrevBtn} disabled={currentPage === pages[0] ? true : false}>Prev</button>
                     </li>
                         {pageDecrementBtn}
                         {renderPageNumbers}
                         {pageIncrementBtn}
                     <li>
-                        <button onClick={handleNextBtn} disabled={currentPage == pages[pages.length - 1] ? true : false}>Next</button>
+                        <button onClick={handleNextBtn} disabled={currentPage === pages[pages.length - 1] ? true : false}>Next</button>
                     </li>
                 </ul>
             </div>
