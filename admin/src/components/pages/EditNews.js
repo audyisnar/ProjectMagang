@@ -18,6 +18,7 @@ const EditNews = () => {
     const [files, setFiles] = useState([]);
     const [contentEn, setContentEn] = useState("");
     const [filesEn, setFilesEn] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     async function getNewsId() {
         try {
@@ -139,7 +140,8 @@ const EditNews = () => {
                         <div className="mt-4 mb-10 p-14 bg-white shadow-xl space-y-10 rounded-xl mx-auto max-w-full">
                             <div className="space-y-4">
                                 <label className="text-netral text-md font-semibold tracking-wide" for="gambar">Upload Thumbnail</label><br />
-                                <input type="file" name="thumbnail" onChange={handleUploadChange} />
+                                <img src={`http://192.168.195.195:5000${urlThumbnail}`} className="h-48 w-56"/>
+                                <input type="file" name="thumbnail" onChange={handleUploadChange}/>
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-center justify-center bg-blue h-10 rounded-t-3xl">

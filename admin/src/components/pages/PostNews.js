@@ -15,6 +15,7 @@ const PostNews = () => {
     const [files, setFiles] = useState([]);
     const [contentEn, setContentEn] = useState("");
     const [filesEn, setFilesEn] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const onEditorChange = (value) => {
         setContentId(value)
@@ -47,6 +48,7 @@ const PostNews = () => {
                 logout();
                 history.replace("/");
             } else{
+                setLoading(true);
                 const uploadRespon = await axios.post(NEWS + "uploadthumbnail", formData, {
                     headers: { Authorization: `Bearer ${tokenRespon}`}
                 });
@@ -76,7 +78,6 @@ const PostNews = () => {
                     thumbnailURL: urlThumbnail,
                     contents: dataNews
                 }
-
                 const postingRespon = await axios.post(NEWS, variables, {
                     headers: { Authorization: `Bearer ${tokenRespon}`}
                 });
@@ -99,6 +100,7 @@ const PostNews = () => {
                         <div className="mt-4 mb-10 p-14 bg-white shadow-xl space-y-10 rounded-xl mx-auto max-w-full">
                             <div className="space-y-4">
                                 <label className="text-netral text-md font-semibold tracking-wide" for="gambar">Upload Thumbnail</label><br/>
+                                <img src={`http://192.168.195.195:5000${urlThumbnail}`} className={loading ? "h-48 w-56" : "hidden"}/>
                                 <input type="file" name="thumbnail" onChange={handleUploadChange}/>
                             </div>
                             <div className="space-y-4">

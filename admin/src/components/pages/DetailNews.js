@@ -41,7 +41,7 @@ const DetailNews = () => {
                     <div className="flex items-center justify-center bg-blue h-12">
                         <p className="text-xl text-white font-semibold">{value.title}</p>
                     </div>
-                    <div>
+                    <div id="content">
                         <div dangerouslySetInnerHTML={{ __html: value.data }} />
                     </div>
                 </div>
