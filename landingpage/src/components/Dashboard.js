@@ -5,8 +5,8 @@ import 'aos/dist/aos.css';
 import mockup2 from '../assets/img/header.png';
 import {Navbar, Nav, Container,NavDropdown } from "react-bootstrap";
 import axios from 'axios';
-// import i18n from "i18next";
-// import {initReactI18next } from "react-i18next";
+import i18n from "i18next";
+import {initReactI18next, useTranslation } from "react-i18next";
 // import LanguageDetector from 'i18next-browser-languagedetector';
 // import HttpApi from 'i18next-http-backend';
 // import '../flag-icon-css/css/flag-icon.min.css'
@@ -24,10 +24,33 @@ import feature3 from '../assets/img/design.png';
 
 
 import News from "./News"
+require('./Translate')
 
 AOS.init({
   once: true,
 });
+
+// const translationEn = {title:"WE BUILD FUTURE!", subTitle:"NOT JUST TECH"}
+// const translationId = {title:"KITA MEMBANGUN MASA DEPAN", subTitle:"TIDAK HANYA TEKNOLOGI"}
+
+// i18n 
+// .use(initReactI18next)
+// .init({
+//   resources:{
+//     en:{
+//       translation: translationEn ,
+//     },
+//     id:{
+//       translation: translationId,
+//     }
+//   },
+//   lng: "en",
+//   fallbackLng: "en",
+//   interpolation: {
+//     escapeValue: false
+//   }
+
+// })
 
 // i18n
 //   .use(initReactI18next) // passes i18n down to react-i18next
@@ -67,205 +90,221 @@ AOS.init({
 // =========================================================
 function Dashboard() {
 
+  const {t}= useTranslation();
+  // const onChange=(event) => {
+  //   i18n.changeLanguage(event.target.value)
+  // }
+
   return (
-    <div classNameName="App">
+<Suspense fallback="loading">
+ <div classNameName="App">
 
-          {/* Header showcase */}
-          <div className="position-relative Header">
-            <img className="cover" src={mockup2} alt="" />
-            <div className="position-absolute showcase-container">
-              <div className="left-showcase">
-                <h1 className="showcase-head">WE BUILD FUTURE</h1>
-                <h2 className="showcase-title">NOT JUST TECH</h2>
-            </div>
-                <div className="position-absolute showcase-Button">
-                <div className="text-center text-lg-start">
-                <div className="form-group mt-4">
-                <button type="button" className="btn text-white button-contact bg-danger" >Start Now</button>
-              </div>
-                  </div>
-              </div>
-            </div>
+{/* Header showcase */}
+<div className="position-relative Header">
+  <img className="cover" src={mockup2} alt="" />
+  <div className="position-absolute showcase-container">
+    <div className="left-showcase">
+      <h1 className="showcase-head">{t("title")}</h1>
+      <h2 className="showcase-title">{t("subTitle")}</h2>
+  </div>
+      <div className="position-absolute showcase-Button">
+      <div className="text-center text-lg-start">
+      <div className="form-group mt-4">
+      {/* <select name="language" onChange={onChange}> 
+      <option value="en">
+        english
+      </option>
+      <option value="id">
+        indonesia
+      </option>
+      </select> */}
+      <button type="button" className="btn text-white button-contact bg-danger" >Start Now</button>
     </div>
-    
-    {/* < Profile > */}
-    <div className="about">
-
-<div className="container" data-aos="fade-up">
-  <div className="row gx-0">
-
-    <div className="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-      <div className="content">
-        <h3>Who We Are</h3>
-        <h2>Creative Digital Agency for Better World</h2>
-        <p>
-Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-        </p>
-        <div className="text-center text-lg-start">
-          <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-            <span>Learn More</span>
-            <i className="bi bi-arrow-right"></i>
-          </a>
         </div>
-      </div>
-    </div>
-
-    <div className="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-      <div className="image">
-    <img className="img-fluid" src={about} alt="" />
-    </div>
     </div>
   </div>
 </div>
-{/* <--service--> */}
-    <div className="service">
-      <div className="title justify-content-center">
-        <div className="text-center">
-            <h5 className="text-info">Our Service</h5>
-            <h1 className="text-black">WHAT WE DO</h1>
-        </div>
-    </div>
-      <div className="content-service">
-        <div className="d-flex flex-row">
-          <div className="d-flex flex-row w-100">
-            <div className="">
-              <div className="icon d-flex justify-content-center align-items-center bg-info">
-                <img className="" src={icon1} alt="" />
-              </div>
-            </div>
-            <div className="">
-              <h5>Brand Strategic</h5>
-              <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-          </div>
-          <div className="d-flex flex-row w-100"> 
-          <div className="">
-            <div className="icon d-flex justify-content-center align-items-center bg-info">
-            <img className="" src={icon2} alt="" />
-            </div>
-            </div>
-            <div className="">
-              <h5>Web Development</h5>
-              <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-          </div>
-          <div className="d-flex flex-row w-100">
-          <div className="">
-            <div className="icon d-flex justify-content-center align-items-center bg-danger">
-            <img className="" src={icon2} alt="" />
-            </div>
-            </div>
-            <div className="">
-              <h5>Web Apps</h5>
-              <p classname="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere.</p>
-            </div>
-          </div>
-        </div>
 
-        <div className="d-flex flex-row w-100">
-        <div className="d-flex flex-row w-100">
-            <div className="">
-              <div className="icon d-flex justify-content-center align-items-center bg-info">
-                <img className="" src={icon3} alt="" />
-              </div>
-            </div>
-            <div className="">
-              <h5>SEO Optimization</h5>
-              <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-          </div>
-          <div className="d-flex flex-row w-100">
-            <div className="">
-              <div className="icon d-flex justify-content-center align-items-center bg-info">
-                <img className="" src={icon3} alt="" />
-              </div>
-            </div>
-            <div className="">
-              <h5>SEO Optimization</h5>
-              <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-          </div>
-          <div className="d-flex flex-row w-100">
-            <div className="">
-              <div className="icon d-flex justify-content-center align-items-center bg-danger">
-                <img className="" src={icon4} alt="" />
-              </div>
-            </div>
-            <div className="">
-              <h5>SMM Marketing</h5>
-              <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-          </div>
-        </div>
-      </div>
+{/* < Profile > */}
+<div className="about">
+
+<div className="container" data-aos="fade-up">
+<div className="row gx-0">
+
+<div className="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+<div className="content">
+<h3>Who We Are</h3>
+<h2>Creative Digital Agency for Better World</h2>
+<p>
+Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+</p>
+<div className="text-center text-lg-start">
+<a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+  <span>Learn More</span>
+  <i className="bi bi-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+
+<div className="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+<div className="image">
+<img className="img-fluid" src={about} alt="" />
+</div>
+</div>
+</div>
+</div>
+{/* <--service--> */}
+<div className="service">
+<div className="title justify-content-center">
+<div className="text-center">
+  <h5 className="text-info">Our Service</h5>
+  <h1 className="text-black">WHAT WE DO</h1>
+</div>
+</div>
+<div className="content-service">
+<div className="d-flex flex-row">
+<div className="d-flex flex-row w-100">
+  <div className="">
+    <div className="icon d-flex justify-content-center align-items-center bg-info">
+      <img className="" src={icon1} alt="" />
     </div>
+  </div>
+  <div className="">
+    <h5>Brand Strategic</h5>
+    <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+</div>
+<div className="d-flex flex-row w-100"> 
+<div className="">
+  <div className="icon d-flex justify-content-center align-items-center bg-info">
+  <img className="" src={icon2} alt="" />
+  </div>
+  </div>
+  <div className="">
+    <h5>Web Development</h5>
+    <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+</div>
+<div className="d-flex flex-row w-100">
+<div className="">
+  <div className="icon d-flex justify-content-center align-items-center bg-danger">
+  <img className="" src={icon2} alt="" />
+  </div>
+  </div>
+  <div className="">
+    <h5>Web Apps</h5>
+    <p classname="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere.</p>
+  </div>
+</div>
+</div>
+
+<div className="d-flex flex-row w-100">
+<div className="d-flex flex-row w-100">
+  <div className="">
+    <div className="icon d-flex justify-content-center align-items-center bg-info">
+      <img className="" src={icon3} alt="" />
+    </div>
+  </div>
+  <div className="">
+    <h5>SEO Optimization</h5>
+    <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+</div>
+<div className="d-flex flex-row w-100">
+  <div className="">
+    <div className="icon d-flex justify-content-center align-items-center bg-info">
+      <img className="" src={icon3} alt="" />
+    </div>
+  </div>
+  <div className="">
+    <h5>SEO Optimization</h5>
+    <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+</div>
+<div className="d-flex flex-row w-100">
+  <div className="">
+    <div className="icon d-flex justify-content-center align-items-center bg-danger">
+      <img className="" src={icon4} alt="" />
+    </div>
+  </div>
+  <div className="">
+    <h5>SMM Marketing</h5>
+    <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+</div>
+</div>
+</div>
+</div>
 
 {/* -----background------ */}
 <div className="position-relative Header">
-            <img className="cover" src={headerAction} alt="" />
-            <div className="position-absolute showcase-container">
-            <div className="text-header">
-            <h5 className="text-head">CALL TO ACTION</h5>
-            <h2 className="text-title">NOT JUST TECH</h2>
-            <p className="text-description">Aliquyam erat, sed diam voluptua. At vero eos et accusam et jus</p>
-            </div>
-            </div>
+  <img className="cover" src={headerAction} alt="" />
+  <div className="position-absolute showcase-container">
+  <div className="text-header">
+  <h5 className="text-head">CALL TO ACTION</h5>
+  <h2 className="text-title">NOT JUST TECH</h2>
+  <p className="text-description">Aliquyam erat, sed diam voluptua. At vero eos et accusam et jus</p>
+  </div>
+  </div>
 </div>
 
 {/* ------Features-------- */}
 
 <div className="features">
 <div className="title justify-content-center">
-        <div className="text-center">
-            <h5 className="text-info">Our Features</h5>
-            <h1 className="text-black">WHY CHOOSE US</h1>
-            <p className="text-black">The purpose of lorem ipsum is to create a natural looking block of text that doesn'tdistract
+<div className="text-center">
+  <h5 className="text-info">Our Features</h5>
+  <h1 className="text-black">WHY CHOOSE US</h1>
+  <p className="text-black">The purpose of lorem ipsum is to create a natural looking block of text that doesn'tdistract
 from the layout laying out pages with meaningle</p>
-        </div>
+</div>
+</div>
+<div className="content-feature">
+<div className="d-flex flex-row justify-content-center">
+<div className="w-25">
+  <div className="">
+    <h5 className="text-center">Easily Managable</h5>
+    <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+  <div className="d-flex justify-content-center">
+    <div className="icon d-flex justify-content-center align-items-center rounded-circle bg-info">
+      <img className="" src={feature1} alt="" />
     </div>
-  <div className="content-feature">
-  <div className="d-flex flex-row justify-content-center">
-          <div className="w-25">
-            <div className="">
-              <h5 className="text-center">Easily Managable</h5>
-              <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-            <div className="d-flex justify-content-center">
-              <div className="icon d-flex justify-content-center align-items-center rounded-circle bg-info">
-                <img className="" src={feature1} alt="" />
-              </div>
-            </div>
-            </div>
-            <div className="w-25">
-            <div className="">
-              <h5 className="text-center">Powerful Codes</h5>
-              <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-            <div className="d-flex justify-content-center">
-              <div className="icon d-flex justify-content-center align-items-center rounded-circle bg-info">
-                <img className="" src={feature2} alt="" />
-              </div>
-            </div>
-            </div>
-            <div className="w-25">
-            <div className="">
-              <h5 className="text-center">Clean Design</h5>
-              <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
-            </div>
-            <div className="d-flex justify-content-center">
-              <div className="icon d-flex justify-content-center align-items-center rounded-circle bg-info">
-                <img className="" src={feature3} alt="" />
-              </div>
-            </div>
-            </div>
   </div>
   </div>
+  <div className="w-25">
+  <div className="">
+    <h5 className="text-center">Powerful Codes</h5>
+    <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+  <div className="d-flex justify-content-center">
+    <div className="icon d-flex justify-content-center align-items-center rounded-circle bg-info">
+      <img className="" src={feature2} alt="" />
+    </div>
+  </div>
+  </div>
+  <div className="w-25">
+  <div className="">
+    <h5 className="text-center">Clean Design</h5>
+    <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
+  </div>
+  <div className="d-flex justify-content-center">
+    <div className="icon d-flex justify-content-center align-items-center rounded-circle bg-info">
+      <img className="" src={feature3} alt="" />
+    </div>
+  </div>
+  </div>
+</div>
+</div>
 
-  {/* ----latest news----- */}
-  <News/>
+{/* ----latest news----- */}
+<News/>
 </div>
 </div>
 </div>
+    </Suspense>
+   
   );
 }
 export default Dashboard;

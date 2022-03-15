@@ -18,9 +18,13 @@
     /* padding: 24px; */
     color: #fff;
   }
-  .footer-container .button{
+  /* .footer-container .button{
     margin-right: 100px;
-    padding-top: 200px;
+    
+    
+  } */
+  .footer-container .footer-button{
+    margin-left: 430px; 
     
   }
   /* .footer-subscription .started{
