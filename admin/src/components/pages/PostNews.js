@@ -134,15 +134,9 @@ const PostNews = () => {
                                 <QuillEditor
                                     toolbarId={"toolbarEn"}
                                     placeholder={"Start Posting News!"}
-<<<<<<< HEAD
-                                    onEditorChangeEn={onEditorChangeEn}
-                                    onFilesChangeEn={onFilesChangeEn}
-                                    flagEn={"post"}
-=======
                                     onEditorChange={onEditorChangeEn}
                                     onFilesChange={onFilesChangeEn}
                                     flag={"post"}
->>>>>>> quilljs
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Submit</button>

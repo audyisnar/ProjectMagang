@@ -20,64 +20,6 @@ const EditNews = () => {
     const [filesEn, setFilesEn] = useState([]);
     const [loading, setLoading] = useState(false);
 
-<<<<<<< HEAD
-    useEffect(() => {
-        async function getNewsId() {
-            try{
-                const tokenRespon = await getToken();
-                if(tokenRespon === 400){
-                    alert("Authentifikasi Gagal, Silahkan Login Kembali");
-                    logout();
-                    history.replace("/");
-                } else{
-                    const newsRespon = await axios.get(NEWS + id, {
-                        headers: { Authorization: `Bearer ${tokenRespon}`}
-                    });
-                    setTitleId(newsRespon.data.contents[0].title);
-                    setTitleEn(newsRespon.data.contents[1].title);
-                    //setContentId(newsRespon.data.contents[0].data);
-                    localStorage.setItem("NEWS_ID", newsRespon.data.contents[0].data);
-                    localStorage.setItem("NEWS_EN", newsRespon.data.contents[1].data);
-                    onEditorChange(newsRespon.data.contents[0].data);
-                    //setApiData(newsRespon.data.contents);
-                    ///console.log(contentId);
-                    //console.log(newsRespon.data);
-                    //console.log(newsRespon.data.contents[0].data);
-                }                
-            } catch(err){
-                console.log(err);
-            }
-        };
-        getNewsId();
-    },[]);
-    console.log(contentId)
-        // axios
-        //     .get(RECIPES + id, config)
-        //     .then((res) => {
-        //         console.log(res);
-        //         console.log(res.data);
-        //         console.log(res.data[0].cholesterol);
-        //         setPublishDate(res.data[0].publish_date);
-        //         setName(res.data[0].name);
-        //         setMadeBy(res.data[0].made_by);
-        //         setCategory(res.data[0].category);
-        //         setCalory(res.data[0].total_calory);
-        //         setEater(res.data[0].total_eater);
-        //         setDuration(res.data[0].duration);
-        //         setLevel(res.data[0].level_of_difficult);
-        //         setCompositions(res.data[0].compositions);
-        //         setSteps(res.data[0].steps_of_make);
-        //         setDescription(res.data[0].short_description);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     }); 
-
-    const onEditorChange = async (value) => {
-        console.log("value : ", value)
-        setContentId(value)
-    }
-=======
     async function getNewsId() {
         try {
             const tokenRespon = await getToken();
@@ -123,7 +65,6 @@ const EditNews = () => {
         getNewsId();
         getNewsEn();
     }, []);
->>>>>>> quilljs
 
     const onFilesChange = (files) => {
         setFiles(files)
@@ -219,10 +160,6 @@ const EditNews = () => {
                                     placeholder={"Mulai Posting Berita!"}
                                     onFilesChange={onFilesChange}
                                     flag={"edit"}
-<<<<<<< HEAD
-                                    id={contentId}
-=======
->>>>>>> quilljs
                                 />
                             </div>
                             <div className="space-y-4">
@@ -240,16 +177,9 @@ const EditNews = () => {
                                     toolbarId={"toolbarEn"}
                                     onContentChange={setContentEn}
                                     placeholder={"Start Posting News!"}
-<<<<<<< HEAD
-                                    onEditorChangeEn={onEditorChangeEn}
-                                    onFilesChangeEn={onFilesChangeEn}
-                                    flagEn={"edit"}
-                                    idEn={id}
-=======
                                     //onEditorChangeEn={onEditorChangeEn}
                                     onFilesChange={onFilesChangeEn}
                                     flag={"edit"}
->>>>>>> quilljs
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Simpan</button>

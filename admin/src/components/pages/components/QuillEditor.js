@@ -201,12 +201,7 @@ class QuillEditor extends React.Component {
     onFilesChange;
     onPollsChange;
     _isMounted;
-<<<<<<< HEAD
-    flag;
-    id;
-=======
     toolbarId;
->>>>>>> quilljs
 
     constructor(props) {
         super(props);
@@ -438,19 +433,6 @@ class QuillEditor extends React.Component {
                     <button className="ql-code-block" />
                     <button className="ql-blockquote" />          
                 </div>
-<<<<<<< HEAD
-                <ReactQuill
-                    ref={(el) => { this.reactQuillRef = el }}
-                    theme={'snow'}
-                    onChange={this.handleChange}
-                    modules={this.modules}
-                    formats={this.formats}
-                    value={this.state.editorHtml}
-                    placeholder={this.props.placeholder}
-                    flag={this.props.flag}
-                    id={this.props.id}
-                />
-=======
                 {
                     this.props.flag === "post" &&
                     <ReactQuill
@@ -475,7 +457,6 @@ class QuillEditor extends React.Component {
                         placeholder={this.props.placeholder}
                     />
                 }
->>>>>>> quilljs
                 <input type="file" accept="image/*" ref={this.inputOpenImageRef} style={{ display: "none" }} onChange={this.insertImage} />
                 <input type="file" accept="video/*" ref={this.inputOpenVideoRef} style={{ display: "none" }} onChange={this.insertVideo} />
                 <input type="file" accept="*" ref={this.inputOpenFileRef} style={{ display: "none" }} onChange={this.insertFile} />
