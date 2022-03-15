@@ -1,48 +1,31 @@
-import React from "react";
+import React, { Component, useState, Suspense } from 'react';
 import { Link } from "react-router-dom";
 import {Navbar, Nav, Container,NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useTranslation} from "react-i18next";
-import i18next from 'i18next'
 import cookies from 'js-cookie'
 import classNames from 'classnames'
+import i18n from "i18next";
+import {initReactI18next, useTranslation } from "react-i18next";
+
+
 
 
 
 import logo from '../assets/img/Logo.png';
-import america from '../assets/img/america.png';
-import indonesia from '../assets/img/indonesia.png';
+// import america from '../assets/img/america.png';
+// import indonesia from '../assets/img/indonesia.png';
 
+require('./Translate')
 
-const languages = [
-  {
-    code: 'id',
-    name: 'Indonesia',
-    country_code: 'id'
-
-  },
-  {
-    code: 'en',
-    name: 'English',
-    country_code: 'us'
-
-  },
-]
 function MenuNavbar() {
 
-  const currentLanguageCode = cookies.get('i18next') || 'en'
-  const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
-  const { t } = useTranslation()
-
-  // useEffect(() => {
-  //   console.log('Setting page stuff')
-  //   document.body.dir = currentLanguage.dir
-  document.title = t('Kyodo News Indonesia')
-  // }, [currentLanguage, t])
-
-
+  const {t}= useTranslation();
+  const onChange=(event) => {
+    i18n.changeLanguage(event.target.value)
+  }
     return (
     // <div className="App">
+    <Suspense fallback="loading">
     <div className="lp-container">
          <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className="navbar sticky-top">
             <Container>
@@ -57,15 +40,22 @@ function MenuNavbar() {
                 <Nav.Link href="#about">Portofolio</Nav.Link>
                 <Nav.Link href="/Contact">Contact</Nav.Link>
                 <button type="button" className="btn text-white button-contact bg-danger" >Let's Meet Up</button>
-              
+                <select name="language" onChange={onChange}> 
+                    <option value="en">
+                      english
+                    </option>
+                    <option value="id">
+                      indonesia
+                    </option>
+                    </select>
                 {/* {languages.map(({ code, country_code}) => ( */}
-                   <li className="dropdown" onClick={() => i18next.changeLanguage ("")} disabled={""}><a href="#"><span className="text-secondary"><img src={america}></img></span> 
+                   {/* <li className="dropdown"><a href="#"><span className="text-secondary"><img src={america}></img></span> 
                    <i className="bi bi-chevron-down"></i></a> 
                   <ul>
                   <li key={""} className=""><a href="#"><img src={indonesia}></img></a>
                   </li>
                   </ul>
-                  </li> 
+                  </li>  */}
                   
                   {/* <div className="dropdown">
             <button
@@ -110,6 +100,7 @@ function MenuNavbar() {
             </Container>
           </Navbar>
         </div> 
+         </Suspense>
 // </div>
         );
 }

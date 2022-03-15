@@ -30,6 +30,8 @@ ul {
 .navbar {
   background-color: rgb(252, 250, 250);
   color: #fff !important;
+  position: absolute;
+  top: 0;
 }
 .navbar img{
   width: 230px;
@@ -38,6 +40,7 @@ ul {
 }
 .navbar .menu-navbar {
   color: #0d0d0e; 
+  
 }
 .navbar .dropdown ul {
   display: block;

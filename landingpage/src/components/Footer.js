@@ -19,7 +19,7 @@ function Footer() {
          Let-us now! we are help you.
         </p>
         </div>
-        <div className="d-flex allign-items-end">
+        <div className="footer-button d-flex allign-items-end ml-auto">
         <button type="button" className="btn text-white button-contact bg-danger w-15" >Let's Meet Up</button>
         </div>
       </section>
