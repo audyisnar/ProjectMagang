@@ -16,7 +16,7 @@ body {
 .lp-container {
   width: 100%;
 }
-
+cd
 a {
   text-decoration: none;
   color: #0d0d0e;
@@ -643,5 +643,8 @@ span {
     margin-top: 40px;
   }
 
+  /* .content-news .image{
+    padding-left: 20px;
+  } */
 
   

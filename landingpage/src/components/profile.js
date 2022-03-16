@@ -1,14 +1,20 @@
-import React from "react";
+import React, { Component, useState, Suspense } from 'react';
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import i18n from "i18next";
+import {initReactI18next, useTranslation } from "react-i18next";
 
 import profileImage from '../assets/img/profile.png';
 import aboutProfile from '../assets/img/about.png';
 import check from '../assets/img/check.png';
 
+require('./Translate')
+
 function Profile() {
+  const {t}= useTranslation();
+
     return (
-      
+<Suspense fallback="loading">    
 <div className="Profile">
   {/* -----background------ */}
 <div className="background">
@@ -16,7 +22,7 @@ function Profile() {
             <img className="cover" src={profileImage} alt="" />
             <div className="position-absolute showcase-container">
             <div className="text-header">
-            <h1 className="text-head">ABOUT US</h1>
+            <h1 className="text-head">{t("bgProfile")}</h1>
             </div>
             </div>
 </div>
@@ -33,8 +39,8 @@ function Profile() {
     </div>
     <div className="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
       <div className="content">
-        <h3>Who We Are</h3>
-        <h2>Creative Digital Agency for Better World</h2>
+        <h3>{t("aboutBg")}</h3>
+        <h2>{t("aboutTitle")}</h2>
         <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo amet posuere porta vitae mi accumsan. Ultricies mauris, habitasse nec mauris sagittis imperdiet lobortis porttitor. Ipsum mi sed aliquet ut. Turpis viverra volutpat sed eu porta morbi egestas. Eros, ut hac rutrum ut augue vitae, nec, ut. Nibh nibh quam sed massa, tincidunt sit aenean. Ut.
 
@@ -53,7 +59,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo amet posuere po
   <div className="content-feature">
   <div className="d-flex flex-row justify-content-center">
     <div className="vision mx-auto">
-  <h5 className="text-center">Vision</h5>
+  <h5 className="text-center">{t("profileTitle1")}</h5>
 
           <div className=" d-flex flex-row w-100">
             <div className="">
@@ -90,7 +96,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo amet posuere po
     </div>
           
           <div className='misson mx-auto'>
-          <h5 className="text-center">Misson</h5>
+          <h5 className="text-center">{t("profileTitle2")}</h5>
           <div className="d-flex flex-row w-100">
             <div className="">
               <div className="d-flex justify-content-center">
@@ -128,6 +134,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo amet posuere po
   </div>
 </div>
 </div>
+</Suspense>
 
     );
 }

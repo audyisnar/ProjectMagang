@@ -118,7 +118,7 @@ function Dashboard() {
         indonesia
       </option>
       </select> */}
-      <button type="button" className="btn text-white button-contact bg-danger" >Start Now</button>
+      <button type="button" className="btn text-white button-contact bg-danger" >{t("buttonHeader")}</button>
     </div>
         </div>
     </div>
@@ -133,14 +133,14 @@ function Dashboard() {
 
 <div className="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
 <div className="content">
-<h3>Who We Are</h3>
-<h2>Creative Digital Agency for Better World</h2>
+<h3>{t("aboutBg")}</h3>
+<h2>{t("aboutTitle")}</h2>
 <p>
 Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
 </p>
 <div className="text-center text-lg-start">
 <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-  <span>Learn More</span>
+  <span>{t("buttonAbout")}</span>
   <i className="bi bi-arrow-right"></i>
 </a>
 </div>
@@ -158,8 +158,8 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
 <div className="service">
 <div className="title justify-content-center">
 <div className="text-center">
-  <h5 className="text-info">Our Service</h5>
-  <h1 className="text-black">WHAT WE DO</h1>
+  <h5 className="text-info">{t("serviceBg1")}</h5>
+  <h1 className="text-black">{t("serviceBg2")}</h1>
 </div>
 </div>
 <div className="content-service">
@@ -171,7 +171,7 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
     </div>
   </div>
   <div className="">
-    <h5>Brand Strategic</h5>
+    <h5>{t("serviceTitle1")}</h5>
     <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
 </div>
@@ -182,7 +182,7 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
   </div>
   </div>
   <div className="">
-    <h5>Web Development</h5>
+    <h5>{t("serviceTitle2")}</h5>
     <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
 </div>
@@ -193,7 +193,7 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
   </div>
   </div>
   <div className="">
-    <h5>Web Apps</h5>
+    <h5>{t("serviceTitle3")}</h5>
     <p classname="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere.</p>
   </div>
 </div>
@@ -207,7 +207,7 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
     </div>
   </div>
   <div className="">
-    <h5>SEO Optimization</h5>
+    <h5>{t("serviceTitle4")}</h5>
     <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
 </div>
@@ -218,7 +218,7 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
     </div>
   </div>
   <div className="">
-    <h5>SEO Optimization</h5>
+    <h5>{t("serviceTitle5")}</h5>
     <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
 </div>
@@ -229,7 +229,7 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
     </div>
   </div>
   <div className="">
-    <h5>SMM Marketing</h5>
+    <h5>{t("serviceTitle6")}</h5>
     <p className="deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
 </div>
@@ -242,8 +242,8 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
   <img className="cover" src={headerAction} alt="" />
   <div className="position-absolute showcase-container">
   <div className="text-header">
-  <h5 className="text-head">CALL TO ACTION</h5>
-  <h2 className="text-title">NOT JUST TECH</h2>
+  <h5 className="text-head">{t("bgTitle")}</h5>
+  <h2 className="text-title">{t("bgSubTitle")}</h2>
   <p className="text-description">Aliquyam erat, sed diam voluptua. At vero eos et accusam et jus</p>
   </div>
   </div>
@@ -254,8 +254,8 @@ Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et 
 <div className="features">
 <div className="title justify-content-center">
 <div className="text-center">
-  <h5 className="text-info">Our Features</h5>
-  <h1 className="text-black">WHY CHOOSE US</h1>
+  <h5 className="text-info">{t("featureBg1")}</h5>
+  <h1 className="text-black">{t("featureBg2")}</h1>
   <p className="text-black">The purpose of lorem ipsum is to create a natural looking block of text that doesn'tdistract
 from the layout laying out pages with meaningle</p>
 </div>
@@ -264,7 +264,7 @@ from the layout laying out pages with meaningle</p>
 <div className="d-flex flex-row justify-content-center">
 <div className="w-25">
   <div className="">
-    <h5 className="text-center">Easily Managable</h5>
+    <h5 className="text-center">{t("featureTitle1")}</h5>
     <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
   <div className="d-flex justify-content-center">
@@ -275,7 +275,7 @@ from the layout laying out pages with meaningle</p>
   </div>
   <div className="w-25">
   <div className="">
-    <h5 className="text-center">Powerful Codes</h5>
+    <h5 className="text-center">{t("featureTitle2")}</h5>
     <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
   <div className="d-flex justify-content-center">
@@ -286,7 +286,7 @@ from the layout laying out pages with meaningle</p>
   </div>
   <div className="w-25">
   <div className="">
-    <h5 className="text-center">Clean Design</h5>
+    <h5 className="text-center">{t("featureTitle3")}</h5>
     <p className="text-center deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque mollis posuere. </p>
   </div>
   <div className="d-flex justify-content-center">

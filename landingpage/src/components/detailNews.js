@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useParams, useHistory } from "react-router-dom";
 import axios from 'axios';
+import './detailNews.css';
 
 import NewsImage from '../assets/img/news.jpg';
 
@@ -30,13 +31,13 @@ function DetailNews() {
       });
     },[]);
 
-const renderNews = () => {
-        // console.log(value.data);
-        return (
-             <div className="entry-content">
-               <div dangerouslySetInnerHTML={{ __html: apiData.data}} />
-             </div>
-)}
+// const renderNews = () => {
+//         // console.log(value.data);
+//         return (
+//              <div className="entry-content">
+//                <div dangerouslySetInnerHTML={{ __html: apiData.data}} />
+//              </div>
+// )}
 
     return (
 
@@ -62,7 +63,7 @@ const renderNews = () => {
 
             
 		{/* {renderNews} */}
-    <div className="entry-content">
+    <div className="entry-content" id="content">
                <div dangerouslySetInnerHTML={{ __html: apiData.data}} />
              </div>
            </div>
