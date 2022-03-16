@@ -12,8 +12,8 @@ import {initReactI18next, useTranslation } from "react-i18next";
 
 
 import logo from '../assets/img/Logo.png';
-// import america from '../assets/img/america.png';
-// import indonesia from '../assets/img/indonesia.png';
+import america from '../assets/img/america.png';
+import indonesia from '../assets/img/indonesia.png';
 
 require('./Translate')
 
@@ -42,10 +42,10 @@ function MenuNavbar() {
                 <button type="button" className="btn text-white button-contact bg-danger" >{t("buttonNav")}</button>
                 <select name="language" onChange={onChange}> 
                     <option value="en">
-                      english
+                    <img src={america}></img>
                     </option>
                     <option value="id">
-                      indonesia
+                    <img src={indonesia}></img>
                     </option>
                     </select>
                 {/* {languages.map(({ code, country_code}) => ( */}

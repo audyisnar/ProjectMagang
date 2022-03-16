@@ -36,7 +36,7 @@ from the layout laying out pages with meaningle</p>
     </div>
 
     <div className="content-news">
-    <div className="d-flex flex-row justify-content-center">
+    <div className="image d-flex flex-row justify-content-center">
           {/* <div className="contentNews"> */}
           {apiData.map((value, index) => (
           <Link to={`/detailNews/${value.slug}`} key={value._id} className="mx-auto w-25">
