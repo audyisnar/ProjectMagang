@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from 'react-router-dom';
 import Sidebar from "./components/Sidebar";
+import Tabs from "./components/ComponentTab";
 import QuillEditor from "./components/QuillEditor";
 import { NEWS } from "../utils/Url";
 import { logout, getToken } from '../utils/Auth';
@@ -74,6 +75,16 @@ const EditNews = () => {
         setFilesEn(files)
     }
 
+    function handleTitleId(title) {
+        setTitleId(title);
+        console.log(title);
+    }
+
+    function handleTitleEn(title) {
+        setTitleEn(title);
+        console.log(title);
+    }
+
     async function handleUploadChange(e) {
         console.log(e.target.files[0]);
         let uploaded = e.target.files[0];
@@ -136,7 +147,20 @@ const EditNews = () => {
             <Sidebar />
             <div className="md:ml-64">
                 <div className="mt-8 px-6 md:px-8 h-auto">
-                    <div className="container mt-4 mb-10 mx-auto max-w-full">
+                    <div className="space-y-4 mb-16">
+                        <div className="space-y-4">
+                            <label className="text-netral text-md font-semibold tracking-wide" for="gambar">Upload Thumbnail</label><br/>
+                            <img src={`http://192.168.195.195:5000${urlThumbnail}`} className="h-48 w-56"/>
+                            <input type="file" name="thumbnail" onChange={handleUploadChange}/>
+                        </div>
+                        <Tabs color="blue" titleId={titleId} titleEn={titleEn} changeTitleId={handleTitleId} changeTitleEn={handleTitleEn} contentId={contentId} contentEn={contentEn} onEditorChangeId={setContentId} onFilesChangeId={onFilesChange} 
+                            onEditorChangeEng={setContentEn} onFilesChangeEng={onFilesChangeEn} flag={"edit"} inputField={true}/>
+                        <div className="flex justify-end">
+                            <button className="bg-blue rounded-md text-white py-2 px-4 w-48" onClick={onSubmit}>Simpan</button>
+                        </div>
+                    </div>
+                    {/* ================================== TANPA TAB ======================= */}
+                    {/* <div className="container mt-4 mb-10 mx-auto max-w-full">
                         <div className="mt-4 mb-10 p-14 bg-white shadow-xl space-y-10 rounded-xl mx-auto max-w-full">
                             <div className="space-y-4">
                                 <label className="text-netral text-md font-semibold tracking-wide" for="gambar">Upload Thumbnail</label><br />
@@ -177,14 +201,13 @@ const EditNews = () => {
                                     toolbarId={"toolbarEn"}
                                     onContentChange={setContentEn}
                                     placeholder={"Start Posting News!"}
-                                    //onEditorChangeEn={onEditorChangeEn}
                                     onFilesChange={onFilesChangeEn}
                                     flag={"edit"}
                                 />
                             </div>
                             <button className="bg-blue rounded-md text-white py-2 px-4" onClick={onSubmit}>Simpan</button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

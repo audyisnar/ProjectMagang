@@ -242,7 +242,7 @@ class QuillEditor extends React.Component {
 
     handleContentChange = event => {
         this.props.onContentChange(event)
-
+        
         console.log(event);
     }
     
@@ -401,7 +401,7 @@ class QuillEditor extends React.Component {
                 })
         }
     };
-
+    
     render() {
         return (
             <div>
