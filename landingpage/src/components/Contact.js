@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,Component, Suspense } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
+import i18n from "i18next";
+import {initReactI18next, useTranslation } from "react-i18next";
 
 
 import contactImage from '../assets/img/contactImage.png';
 import location from '../assets/img/location.png';
 import emailImg from '../assets/img/email.png';
 import phoneImg from '../assets/img/phone.png';
+
+require('./Translate')
 
 function Contact() {
 
@@ -43,7 +47,10 @@ function Contact() {
     }
   }
 
+  const {t}= useTranslation();
+  
     return (
+<Suspense fallback="loading">
 <div className="contactPage">
 
 {/* ----------background-------- */}
@@ -52,7 +59,7 @@ function Contact() {
             <img className="cover" src={contactImage} alt="" />
             <div className="position-absolute showcase-container">
             <div className="text-header">
-            <h1 className="text-head">LETS WORK TOGETHER</h1>
+            <h1 className="text-head">{t("contactBg")}</h1>
             </div>
             </div>
 </div>
@@ -61,7 +68,7 @@ function Contact() {
       <div className="container">
         <div className="row pt-4 mb-4">
           <div className="col">
-            <h2>Lets talk about everything</h2>
+            <h2>{t("contactTitle")}</h2>
           </div>
         </div>
 
@@ -70,31 +77,31 @@ function Contact() {
           <div className="col-lg-6" data-aos="fade-left" data-aos-duration="2000">
             <form className="contact input">
               <div className="form-group">
-                <label for="name">Name</label>
-                <input type="text" className="form-control" id="name" placeholder="Input Your Name"
+                <label for="name">{t("name")}</label>
+                <input type="text" className="form-control" id="name" placeholder={t("contentName")}
                         value={name} onChange={(e) => setName(e.target.value)}>
                 </input>
               </div>
               <div className="form-group mt-2">
-                <label for="email">Email</label>
-                <input type="text" className="form-control" id="email" placeholder="Input Your Email"
+                <label for="email">{t("email")}</label>
+                <input type="text" className="form-control" id="email" placeholder={t("contentEmail")}
                         value={email} onChange={(e) => setEmail(e.target.value)}>
                 </input>
               </div>
               <div className="form-group mt-2">
-                <label for="phone">Phone</label>
-                <input type="text" className="form-control" id="phone" placeholder="Input Your Phone Number"
+                <label for="phone">{t("phone")}</label>
+                <input type="text" className="form-control" id="phone" placeholder={t("contentPhone")}
                          value={phone} onChange={(e) => setPhone(e.target.value)}>
                 </input>
               </div>
               <div className="form-group mt-2">
-                <label for="comment">Message</label>
-                <textarea name="comment" id="comment" className="form-control h-25"
+                <label for="comment">{t("message")}</label>
+                <textarea name="comment" id="comment" className="form-control h-25" placeholder={t("contentMessage")}
                         value={comment} onChange={(e) => setComment(e.target.value)}>
                 </textarea>
               </div>
               <div className="form-group mt-4">
-                <button type="button" className="btn text-white button-contact" onClick={uploadData}>Submit</button>
+                <button type="button" className="btn text-white button-contact" onClick={uploadData}>{t("submit")}</button>
               </div>
             </form>
           </div>
@@ -125,7 +132,7 @@ function Contact() {
       </div>
     </section>
 </div>
-
+</Suspense>
 );
 }
 export default Contact;

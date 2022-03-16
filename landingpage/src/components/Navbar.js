@@ -34,12 +34,12 @@ function MenuNavbar() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="menu-navbar collapse navbar-collapse justify-content-end text-dark ">
-                <Nav.Link href="/">Homepage</Nav.Link>
-                <Nav.Link href="/Profile">Who We Are</Nav.Link>
-                <Nav.Link href="/service">Service</Nav.Link>
-                <Nav.Link href="#about">Portofolio</Nav.Link>
-                <Nav.Link href="/Contact">Contact</Nav.Link>
-                <button type="button" className="btn text-white button-contact bg-danger" >Let's Meet Up</button>
+                <Nav.Link href="/">{t("menuNav1")}</Nav.Link>
+                <Nav.Link href="/Profile">{t("aboutBg")}</Nav.Link>
+                <Nav.Link href="/service">{t("menuNav3")}</Nav.Link>
+                <Nav.Link href="#about">{t("menuNav4")}</Nav.Link>
+                <Nav.Link href="/Contact">{t("menuNav5")}</Nav.Link>
+                <button type="button" className="btn text-white button-contact bg-danger" >{t("buttonNav")}</button>
                 <select name="language" onChange={onChange}> 
                     <option value="en">
                       english
@@ -56,45 +56,6 @@ function MenuNavbar() {
                   </li>
                   </ul>
                   </li>  */}
-                  
-                  {/* <div className="dropdown">
-            <button
-              className="btn btn-link dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {/* <GlobeIcon /> */}
-            {/* </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <span className="dropdown-item-text">{t('language')}</span>
-              </li>
-              {languages.map(({ code, name, country_code }) => (
-                <li key={country_code}>
-                  <a
-                    href="#"
-                    className={classNames('dropdown-item', {
-                      disabled: currentLanguageCode === code,
-                    })}
-                    onClick={() => {
-                      i18next.changeLanguage(code)
-                    }}
-                  >
-                    <span
-                      className={`flag-icon flag-icon-${country_code} mx-2`}
-                      style={{
-                        opacity: currentLanguageCode === code ? 0.5 : 1,
-                      }}
-                    ></span>
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-            {/* // <i className="bi bi-chevron-down"></i></a> */}
           </Nav>
             </Navbar.Collapse>
             </Container>
