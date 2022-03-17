@@ -478,8 +478,6 @@ video {
 	margin-bottom: -1px;
 }.mr-2{
 	margin-right: 0.5rem;
-}.mb-12{
-	margin-bottom: 3rem;
 }.mt-1{
 	margin-top: 0.25rem;
 }.mt-2{
@@ -490,6 +488,8 @@ video {
 	margin-bottom: 0.25rem;
 }.mt-12{
 	margin-top: 3rem;
+}.mb-12{
+	margin-bottom: 3rem;
 }.ml-4{
 	margin-left: 1rem;
 }.-mr-4{
@@ -528,6 +528,8 @@ video {
 	height: 1.5rem;
 }.h-48{
 	height: 12rem;
+}.h-56{
+	height: 14rem;
 }.h-5{
 	height: 1.25rem;
 }.h-72{

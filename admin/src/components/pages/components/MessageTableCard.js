@@ -134,7 +134,7 @@ export default function MessageCardTable(props) {
                                 <td className="py-3 px-6 text-left capitalize">
                                     <span>{value.name}</span>
                                 </td>
-                                <td className="py-3 px-6 text-center capitalize">
+                                <td className="py-3 px-6 text-center">
                                     <span>{value.email}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center">

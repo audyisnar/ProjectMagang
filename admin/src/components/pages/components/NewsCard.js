@@ -9,7 +9,7 @@ export default function NewsCard(props) {
                 <p className="text-xl text-white font-bold text-center mt-8 mb-4 tracking-widest">BERITA TERBARU</p>
                 <div className="relative flex flex-wrap justify-center bg-blue mb-10">
                     {props.contentNews.map((value, index) => (
-                        <Link key={value._id} className="cards h-72 w-72 m-4 bg-white shadow-md rounded-3xl drop-shadow-2xl py-5 space-y-4 hover" 
+                        <Link key={value._id} className="cards w-72 m-4 bg-white shadow-md rounded-3xl drop-shadow-2xl py-5 space-y-4 hover" 
                             to={`/detail-berita/${value.slug}`}
                         >
                             <div className="flex justify-center">
